@@ -1,3 +1,33 @@
+## PostgreSQL setup
+For now, you need to install postgres locally.
+For mac, use:
+brew install postgresql
+
+I'm using the credentials joshuayeh with password 'password'
+I don't think you need to create a new user to start it though
+Now that you have postgres installed, run
+
+psql -U postgres
+CREATE DATABASE moviesdb;
+
+psql -d moviesdb -a -f src/schema.sql
+^^^ assuming you are in the project directory ^^^
+
+To make sure this works, run
+psql -d moviesdb
+\dt
+
+The table "reviews" should show up.
+If this doesn't work, ask josh for questions.
+
+## Setting up server
+
+You need to start the server to connect to the database. to do so, run
+npm install pg
+npm install cors
+node src/server.js
+^^^ again, assuming you are in the project directory ^^^
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
