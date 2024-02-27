@@ -18,6 +18,13 @@ psql -d moviesdb
 \dt
 
 The table "reviews" should show up.
+
+Next, in stil in psql moviesdb:
+do the commands:
+CREATE USER name WITH PASSWORD 'password';
+ALTER USER name WITH SUPERUSER;
+
+Should work.
 If this doesn't work, ask josh for questions.
 
 ## Setting up server
