@@ -7,7 +7,7 @@ I'm using the credentials joshuayeh with password 'password'
 I don't think you need to create a new user to start it though
 Now that you have postgres installed, run
 
-psql -U postgres
+psql postgres
 CREATE DATABASE moviesdb;
 
 psql -d moviesdb -a -f src/schema.sql
