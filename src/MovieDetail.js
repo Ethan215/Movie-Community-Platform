@@ -5,13 +5,12 @@ import './MovieDetail.css'
 function MovieDetail() {
   const navigate = useNavigate();
   const [movie, setMovie] = useState(null);
-  const [reviews, setReviews] = useState([]); // State to hold reviews
-  const { id } = useParams(); // Retrieve the movie ID from the URL
+  const [reviews, setReviews] = useState([]); 
+  const { id } = useParams(); 
   const [reviewText, setReviewText] = useState('');
-  const [rating, setRating] = useState(5); // default rating
+  const [rating, setRating] = useState(5); 
 
   useEffect(() => {
-    // Function to fetch movie data
     const fetchMovie = async () => {
       try {
         const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=7fe3338624f016b56f11393910f1f293`);
@@ -27,23 +26,23 @@ function MovieDetail() {
   
     const fetchReviews = async () => {
       try {
-        const res = await fetch(`http://localhost:3001/reviews/${id}`); // Adjust the URL as needed
+        const res = await fetch(`http://localhost:3001/reviews/${id}`); 
         if (!res.ok) {
           throw new Error('Reviews not found');
         }
         const data = await res.json();
-        setReviews(data); // Set reviews state
+        setReviews(data); 
       } catch (error) {
         console.error("Failed to fetch reviews:", error);
       }
     };
     fetchMovie();
     fetchReviews();
-  }, [id]); // Rerun the effect if movieId changes
+  }, [id]); 
   
   //function to submit review, posts to reviews
   const handleSubmitReview = async (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
+    e.preventDefault(); 
 
     try {
       const response = await fetch('http://localhost:3001/reviews', { 
@@ -62,10 +61,6 @@ function MovieDetail() {
         throw new Error('Failed to submit review');
       }
 
-      // Optionally, fetch reviews again to update the list
-      // fetchReviews();
-
-      // Reset form
       setReviewText('');
       setRating(5);
     } catch (error) {
@@ -79,7 +74,7 @@ function MovieDetail() {
 
   return (
       <div>
-      <button onClick={() => navigate('/') }className = "home-button">Back to Home</button>
+      <button onClick={() => navigate('/home') }className = "home-button">Back to Home</button>
       <div style={{ display: 'flex', alignItems: 'center', margin: '20px' }}>
         <img
             src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
@@ -87,7 +82,7 @@ function MovieDetail() {
             style={{
             width: "135px",
             height: "200px",
-            marginRight: "20px", // Added space between the image and the text
+            marginRight: "20px", 
             }}
         />
 
