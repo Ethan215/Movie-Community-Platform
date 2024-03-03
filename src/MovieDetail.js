@@ -79,7 +79,7 @@ function MovieDetail() {
 
   return (
       <div>
-      <button onClick={() => navigate('/') }className = "home-button">Back to Home</button>
+      <button onClick={() => navigate('/fetch') }className = "home-button">Back to Home</button>
       <div style={{ display: 'flex', alignItems: 'center', margin: '20px' }}>
         <img
             src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}

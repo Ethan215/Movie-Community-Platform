@@ -1,8 +1,7 @@
 // Import React and the necessary firebase functions
 import React, { useContext, useState, useEffect } from "react"
 import { auth } from "./firebase"
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail  } from "firebase/auth";
 // Create a context for authentication
 const AuthContext = React.createContext()
 
@@ -21,32 +20,41 @@ export function AuthProvider({ children }) {
   function signup(email, password) {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        console.log(userCredential);
+        const user = userCredential.user;
       })
       .catch((error) => {
-        console.log(error);
+        const errorCode = error.code;
+        const errorMessage = error.message;
       });
   }
 
-  // Login function
-  function login(email, password) {
-    signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      console.log(userCredential);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  async function login(email, password) {
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+     // Login successfully, return user information
+      return userCredential.user;
+    } catch (error) {
+     // Failed to log in, throws an error so it can be caught where it's called
+      throw error;
+    }
   }
-
+  
   // Logout function
   function logout() {
     return auth.signOut()
   }
 
   // Reset password function
-  function resetPassword(email) {
-    return auth.sendPasswordResetEmail(email)
+  async function resetPassword(email) {
+    try {
+      await sendPasswordResetEmail(auth, email);
+      // Password reset e-mail sent
+      console.log("Password reset email sent successfully.");
+      return "Password reset email sent successfully.";
+    } catch (error) {
+      console.error("Failed to send password reset email:", error);
+      throw error;
+    }  
   }
 
   // Update email function
