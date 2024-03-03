@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from "./contexts/AuthContext";
+import { useAuthUser } from "./contexts/AuthUserContext";
 import { Button, Alert } from "react-bootstrap";
 
 function Fetch() {
   const [movieList, setMovieList] = useState([]);
   const [error, setError] = useState("");
-  const { logout } = useAuth();
+  const { logout } = useAuthUser();
   const navigate = useNavigate();
 
   const getMovie = () => {

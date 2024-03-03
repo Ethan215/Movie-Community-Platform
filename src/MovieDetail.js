@@ -1,23 +1,31 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { Alert } from "react-bootstrap"
 import { db } from './contexts/firebase';
-import { collection, addDoc, where, query, serverTimestamp, getDocs } from "firebase/firestore";
+import { collection, addDoc, where, query, serverTimestamp, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { useParams, useNavigate } from 'react-router-dom';
 import './MovieDetail.css'
+import { useAuthUser } from './contexts/AuthUserContext';
 
 function MovieDetail() {
+  const [editRating, setEditRating] = useState(5);
+  const [editReviewText, setEditReviewText] = useState('');
+  const [editingReviewId, setEditingReviewId] = useState(null);
+  const { currentUser } = useAuthUser();
   const navigate = useNavigate();
   const [movie, setMovie] = useState(null);
   const [reviews, setReviews] = useState([]); 
   const { id } = useParams(); 
   const [reviewText, setReviewText] = useState('');
   const [rating, setRating] = useState(5); 
+  const [errorMessage, setErrorMessage] = useState('');
   
   
   const fetchReviews = useCallback(async () => {
     try {
       const q = query(collection(db, "reviews"), where("movie_id", "==", id));
       const querySnapshot = await getDocs(q);
-      const reviewsData = querySnapshot.docs.map(doc => doc.data());
+      const reviewsData = querySnapshot.docs.map(doc => ({id: doc.id, 
+      ...doc.data(),}));
       setReviews(reviewsData);
     } catch (error) {
       console.error("Failed to fetch reviews:", error);
@@ -44,18 +52,63 @@ function MovieDetail() {
     fetchReviews();
   }, [id, fetchReviews]); 
   
+
+  const handleSaveEdit = async (reviewId) => {
+    const reviewDoc = doc(db, "reviews", reviewId);
+    try {
+      await updateDoc(reviewDoc, {
+        rating: Number(editRating),
+        review_text: editReviewText,
+        edited_at: serverTimestamp()
+      });
+      setEditingReviewId(null); // Exit editing mode
+      setEditRating(5);
+      setEditReviewText('')
+      setReviewText('');
+      setRating(5);
+      fetchReviews();
+    } catch (error) {
+      console.error("Error updating review:", error);
+    }
+  };
+  const startEdit = (review) => {
+    setEditRating(review.rating);
+    setEditReviewText(review.review_text);
+    setEditingReviewId(review.id);
+    // Plus, potentially open a modal or reveal the edit form
+  };
+
+  const handleDeleteReview = async (reviewId)=>{
+    if (window.confirm("Delete Review? This action cannot be undone.")) {
+    try {
+      await deleteDoc(doc(db, "reviews", reviewId));
+      fetchReviews(); // Refresh reviews after deletion
+    } catch (error) {
+      console.error("Error deleting review:", error);
+    }
+  }
+  };
+  
   //function to submit review, posts to reviews
   const handleSubmitReview = async (e) => {
     e.preventDefault(); 
 
     try {
-      await addDoc(collection(db, "reviews"),{
-        movie_id: id,
-        rating: Number(rating),
-        review_text: reviewText,
-        created_at: serverTimestamp()
-      });
-  
+      const q = query(collection(db, "reviews"), where("username", "==", currentUser.username), where("movie_id", "==", id) );
+      const querySnapshot = await getDocs(q);
+      const reviewsData = querySnapshot.docs.map(doc => doc.data());
+      setErrorMessage('');
+      if(reviewsData.length!==0){
+        setErrorMessage("You already posted a review. Delete or edit your current review.")
+      }else{
+        await addDoc(collection(db, "reviews"),{
+          movie_id: id,
+          rating: Number(rating),
+          review_text: reviewText,
+          username: currentUser.username,
+          created_at: serverTimestamp()
+        });
+      }
       setReviewText('');
       setRating(5);
       fetchReviews(); // Re-fetch reviews after submitting
@@ -92,9 +145,32 @@ function MovieDetail() {
       {reviews.length > 0 ? (
         reviews.map((review) => (
           <div key={review.id}>
-            <p>Rating: {review.rating}</p>
-            <p>{review.review_text}</p>
-            <p>Reviewed on: {review.created_at?.toDate()?.toLocaleDateString() || "Unknown date"}</p>
+             {editingReviewId === review.id ? (
+                  // Render input fields for editing
+                  <div>
+                    <select id="rating" value={editRating} onChange={(e) => setEditRating(e.target.value)}>
+                      {[1, 2, 3, 4, 5].map((number) => (
+                        <option key={number} value={number}>{number}</option>
+                      ))}
+                    </select>
+                    <textarea
+                      value={editReviewText}
+                      onChange={(e) => setEditReviewText(e.target.value)}
+                    />
+                    <button onClick={() => handleSaveEdit(review.id)}>Save</button>
+                    <button onClick={() => setEditingReviewId(null)}>Cancel</button>
+                  </div>
+                ) : (
+                  <p>Reviewer: {review.username}, Rating: {review.rating}, Review: {review.review_text}, 
+                  Reviewed on: {review.created_at?.toDate()?.toLocaleDateString() || "Unknown date"},
+                  {review.edited_at && ` Edited on: ${review.edited_at.toDate().toLocaleDateString()}`}</p>
+                )}
+            {currentUser && currentUser.username === review.username && (
+              <>
+                <button onClick={() => startEdit(review)}>Edit Review</button>
+                <button onClick={() => handleDeleteReview(review.id)}>Delete Review</button>
+              </>
+            )}
           </div>
         ))
       ) : (
@@ -105,6 +181,7 @@ function MovieDetail() {
       
         <h2>Submit a Review</h2>
         <form onSubmit={handleSubmitReview}>
+        {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
           <div>
             <label htmlFor="rating">Rating:</label>
             <select id="rating" value={rating} onChange={(e) => setRating(e.target.value)}>

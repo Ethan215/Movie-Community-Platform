@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "./contexts/AuthContext";
+import { AuthUserProvider } from "./contexts/AuthUserContext";
 import Signup from "./components/Signup";
 // import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
@@ -14,7 +14,7 @@ import { Container } from 'react-bootstrap';
 function App() {
   return (
     <Router>
-      <AuthProvider>
+      <AuthUserProvider>
         <Routes>
           {/* 主界面路由 */}
           <Route path="/" element={<Login />} ></Route>
@@ -30,7 +30,7 @@ function App() {
           {/* <Route path="/" element={<ContainerComponent><PrivateRoute><Dashboard /></PrivateRoute></ContainerComponent>} /> */}
           <Route path="/update-profile" element={<ContainerComponent><PrivateRoute><UpdateProfile /></PrivateRoute></ContainerComponent>} />
         </Routes>
-      </AuthProvider>
+      </AuthUserProvider>
     </Router>
   );
 }

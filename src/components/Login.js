@@ -1,12 +1,15 @@
 import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuthUser } from "../contexts/AuthUserContext";
 import { Link, useNavigate } from "react-router-dom";
+import { db } from "../contexts/firebase";
+import { getDocs, query, collection, where } from "firebase/firestore";
+
 
 export default function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { login } = useAuth();
+  const { login, setCurrentUser } = useAuthUser();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -18,12 +21,26 @@ export default function Login() {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
-
+      const q = query(collection(db, "users"), where("email", "==", emailRef.current.value));
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.empty) {
+        const userDoc = querySnapshot.docs[0];
+        setCurrentUser({
+          username: userDoc.data().username,
+          email: userDoc.data().email 
+        });
+        localStorage.setItem('userDetails', JSON.stringify({
+          username: userDoc.data().username,
+          email: userDoc.data().email
+        }));
+      } else {
+        console.log("No user found with that email");
+      }
       navigate("/home"); // 导航到home页面
 
     } catch (error) {
-      // console.error(error);
-      // setError("Failed to log in. Error: " + error.message);
+       console.error(error);
+      //setError("Failed to log in. Error: " + error.message);
       setError("Please enter the correct e-mail and password");
 
     }

@@ -1,7 +1,9 @@
 import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
-import { useAuth } from "../contexts/AuthContext"
+import { useAuthUser } from "../contexts/AuthUserContext"
 import { Link, useNavigate } from "react-router-dom"
+import { db } from "../contexts/firebase"
+import { collection, addDoc, where, query, getDocs } from "firebase/firestore";
 
 export default function Signup() {
   // Create references for the email, password, and password confirm inputs
@@ -9,12 +11,13 @@ export default function Signup() {
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
   const usernameRef = useRef()
-  const { signup } = useAuth()
+  const { signup } = useAuthUser()
   // Destructure signup from the useAuth context
   //const { signup } = useAuth()
   // Create state for error and loading
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
+  const [errorText, setErrorText] = useState('')
   // Use the useNavigate hook to navigate
   const navigate = useNavigate()
 
@@ -27,20 +30,33 @@ export default function Signup() {
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Passwords do not match")
     }
-
-    try {
-      setError(""); // Clear previous error messages
-      setLoading(true); 
-      const user = await signup(emailRef.current.value, passwordRef.current.value);
-      console.log("Successful registration:", user);
-      navigate("/login"); // Jump after successful registration
-
-    } catch (error) {
-      console.error("Registration Failure:", error);
-      setError("Failed to create an account. Error: " + error.message); // Display error messages
-    } finally {
-      setLoading(false); 
-    }
+    setError(""); // Clear previous error messages
+    setLoading(true); 
+      const q = query(collection(db, "users"), where("username", "==", usernameRef.current.value));
+      const q2 = query(collection(db, "users"), where("email", "==", emailRef.current.value));
+      const querySnapshot = await getDocs(q);
+      const querySnapshot2 = await getDocs(q2);
+      const reviewsData = querySnapshot.docs.map(doc => doc.data());
+      const reviewsData2 = querySnapshot2.docs.map(doc => doc.data());
+      if(reviewsData.length!==0){
+        setErrorText("Error: Username is taken")
+      }else if(reviewsData2.length!==0){
+        setErrorText("Error: Email is taken")
+      }else{
+        await addDoc(collection(db, "users"),{
+          username: usernameRef.current.value,
+          email: emailRef.current.value
+        });
+        const user = await signup(emailRef.current.value, passwordRef.current.value);
+        try{
+        console.log("Successful registration:", user);
+        navigate("/login"); // Jump after successful registration
+        }catch (error) {
+          console.error("Registration Failure:", error);
+          setError("Failed to create an account. Error: " + error.message); // Display error messages
+        }
+      }
+      
   }
 
   return (
@@ -50,6 +66,8 @@ export default function Signup() {
           <h2 className="text-center mb-4">Sign Up</h2>
           {/* Display any errors */}
           {error && <Alert variant="danger">{error}</Alert>}
+          {/* Display error related to username being taken */}
+          {errorText && <Alert variant="danger">{errorText}</Alert>}
           {/* Display sign up form table */}
           <Form onSubmit={handleSubmit}>
             <Form.Group id="email">
