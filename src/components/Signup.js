@@ -30,32 +30,18 @@ export default function Signup() {
     }
 
     try {
-      // Clear any existing errors
-      setError("")
-      // Set loading to true
-      setLoading(true)
+      setError(""); // Clear previous error messages
+      setLoading(true); 
+      const user = await signup(emailRef.current.value, passwordRef.current.value);
+      console.log("Successful registration:", user);
+      navigate("/login"); // Jump after successful registration
 
-      // Call the signup function with the email and password
-      const userCreate = await firebase.auth().createUserWithEmailAndPassword(
-        emailRef.current.value, 
-        passwordRef.current.value
-      );
-      const user = userCreate.user;
-
-      await user.updateProfile({displayName: usernameRef.current.value});
-      await db.collection("users").doc(user.uid).set({
-        username: usernameRef.current.value,
-        email: emailRef.current.value
-      });
-      // Navigate to the home page
-      navigate("/login")
     } catch (error) {
-        console.error(error);
-        setError("Failed to create an account. Error: " + error.message);
+      console.error("Registration Failure:", error);
+      setError("Failed to create an account. Error: " + error.message); // Display error messages
+    } finally {
+      setLoading(false); 
     }
-      
-    // Set loading to false
-    setLoading(false)
   }
 
   return (

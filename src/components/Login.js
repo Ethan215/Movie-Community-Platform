@@ -18,10 +18,14 @@ export default function Login() {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
+
       navigate("/home"); // 导航到home页面
+
     } catch (error) {
-      console.error(error);
-      setError("Failed to log in. Error: " + error.message);
+      // console.error(error);
+      // setError("Failed to log in. Error: " + error.message);
+      setError("Please enter the correct e-mail and password");
+
     }
 
     setLoading(false);
