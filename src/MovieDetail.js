@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
+import { db } from './contexts/firebase';
+import { collection, addDoc, where, query, serverTimestamp, getDocs } from "firebase/firestore";
 import { useParams, useNavigate } from 'react-router-dom';
 import './MovieDetail.css'
 
@@ -9,6 +11,19 @@ function MovieDetail() {
   const { id } = useParams(); 
   const [reviewText, setReviewText] = useState('');
   const [rating, setRating] = useState(5); 
+  
+  
+  const fetchReviews = useCallback(async () => {
+    try {
+      const q = query(collection(db, "reviews"), where("movie_id", "==", id));
+      const querySnapshot = await getDocs(q);
+      const reviewsData = querySnapshot.docs.map(doc => doc.data());
+      setReviews(reviewsData);
+    } catch (error) {
+      console.error("Failed to fetch reviews:", error);
+    }
+  }, [id]); 
+
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -24,52 +39,33 @@ function MovieDetail() {
       }
     };
   
-    const fetchReviews = async () => {
-      try {
-        const res = await fetch(`http://localhost:3001/reviews/${id}`); 
-        if (!res.ok) {
-          throw new Error('Reviews not found');
-        }
-        const data = await res.json();
-        setReviews(data); 
-      } catch (error) {
-        console.error("Failed to fetch reviews:", error);
-      }
-    };
+    
     fetchMovie();
     fetchReviews();
-  }, [id]); 
+  }, [id, fetchReviews]); 
   
   //function to submit review, posts to reviews
   const handleSubmitReview = async (e) => {
     e.preventDefault(); 
 
     try {
-      const response = await fetch('http://localhost:3001/reviews', { 
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          movie_id: id, // From useParams
-          rating,
-          review_text: reviewText,
-        }),
+      await addDoc(collection(db, "reviews"),{
+        movie_id: id,
+        rating: Number(rating),
+        review_text: reviewText,
+        created_at: serverTimestamp()
       });
-
-      if (!response.ok) {
-        throw new Error('Failed to submit review');
-      }
-
+  
       setReviewText('');
       setRating(5);
+      fetchReviews(); // Re-fetch reviews after submitting
     } catch (error) {
       console.error("Error submitting review:", error);
     }
   };
 
   if (!movie) {
-    return <div>Loading...</div>;
+    return <div>Movie Doesn't Exist</div>;
   }
 
   return (
@@ -98,7 +94,7 @@ function MovieDetail() {
           <div key={review.id}>
             <p>Rating: {review.rating}</p>
             <p>{review.review_text}</p>
-            <p>Reviewed on: {new Date(review.created_at).toLocaleDateString()}</p>
+            <p>Reviewed on: {review.created_at?.toDate()?.toLocaleDateString() || "Unknown date"}</p>
           </div>
         ))
       ) : (
@@ -121,6 +117,7 @@ function MovieDetail() {
             <label htmlFor="reviewText">Review:</label>
             <textarea id="reviewText" value={reviewText} onChange={(e) => setReviewText(e.target.value)} />
           </div>
+
           <button type="submit">Submit Review</button>
         </form>
       </div>
