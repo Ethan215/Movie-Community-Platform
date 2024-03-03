@@ -18,7 +18,7 @@ function App() {
         <Routes>
           {/* 主界面路由 */}
           <Route path="/" element={<Login />} ></Route>
-          <Route path="/fetch" element={<Fetch />} />
+          <Route path="/home" element={<Fetch />} />
           <Route path="/movie/:id" element={<MovieDetail />} />
 
           {/* 用户认证路由 */}

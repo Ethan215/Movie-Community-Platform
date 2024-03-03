@@ -18,7 +18,9 @@ export default function Login() {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
-      navigate("/fetch"); 
+
+      navigate("/home"); // 导航到home页面
+
     } catch (error) {
       // console.error(error);
       // setError("Failed to log in. Error: " + error.message);

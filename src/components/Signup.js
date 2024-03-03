@@ -1,6 +1,8 @@
+import firebase from "firebase/compat/app";
+import { db } from "../contexts/firebase";
 import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
-import { useAuth } from "../contexts/AuthContext"
+//import { useAuth } from "../contexts/AuthContext"
 import { Link, useNavigate } from "react-router-dom"
 
 export default function Signup() {
@@ -8,8 +10,9 @@ export default function Signup() {
   const emailRef = useRef()
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
+  const usernameRef = useRef()
   // Destructure signup from the useAuth context
-  const { signup } = useAuth()
+  //const { signup } = useAuth()
   // Create state for error and loading
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
@@ -32,6 +35,7 @@ export default function Signup() {
       const user = await signup(emailRef.current.value, passwordRef.current.value);
       console.log("Successful registration:", user);
       navigate("/login"); // Jump after successful registration
+
     } catch (error) {
       console.error("Registration Failure:", error);
       setError("Failed to create an account. Error: " + error.message); // Display error messages
@@ -60,6 +64,10 @@ export default function Signup() {
             <Form.Group id="password-confirm">
               <Form.Label>Password Confirmation</Form.Label>
               <Form.Control type="password" ref={passwordConfirmRef} required />
+            </Form.Group>
+            <Form.Group id="username">
+              <Form.Label>Username</Form.Label>
+              <Form.Control type="text" ref={usernameRef} required />
             </Form.Group>
             {/* Disable the button if loading */}
             <Button disabled={loading} className="w-100" type="submit">

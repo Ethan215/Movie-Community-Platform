@@ -31,7 +31,7 @@ export default function UpdateProfile() {
 
     Promise.all(promises)
       .then(() => {
-        navigate("/fetch")
+        navigate("/home")
       })
       .catch(() => {
         setError("Failed to update account")
