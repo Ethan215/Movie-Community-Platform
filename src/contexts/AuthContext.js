@@ -19,13 +19,6 @@ export function AuthProvider({ children }) {
   // Sign up function
   function signup(email, password) {
     createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-      });
   }
 
   async function login(email, password) {
