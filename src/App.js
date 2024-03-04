@@ -10,6 +10,7 @@ import UpdateProfile from "./components/UpdateProfile";
 import Fetch from "./Fetch"; 
 import MovieDetail from "./MovieDetail"; 
 import { Container } from 'react-bootstrap';
+import UserPage from "./UserPage";
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
           <Route path="/" element={<Login />} ></Route>
           <Route path="/home" element={<Fetch />} />
           <Route path="/movie/:id" element={<MovieDetail />} />
-
+          <Route path ="/user/:username" element = {<UserPage />} />
           {/* 用户认证路由 */}
           <Route path="/signup" element={<ContainerComponent><Signup /></ContainerComponent>} />
           <Route path="/login" element={<ContainerComponent><Login /></ContainerComponent>} />
