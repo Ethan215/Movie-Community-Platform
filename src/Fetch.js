@@ -18,19 +18,25 @@ function Fetch() {
       accept: 'application/json',
       Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YTkwODE5MTAxZDA5MWQ5MTBjYzE0ZjdkZDdmYWE1NSIsInN1YiI6IjY1YmYzZjgyYmE0ODAyMDE4MjZjMWE5YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.KOl14U2aSpIol1hFgSSBS0GBwxlPJ7PcBKOzKYqc8gM'
     }
-  };
+  };  // simplifies fetch calls: insert 'options' as secondary parameter in any fetch, no API key needed!
+
+  useEffect(() => {
+    fetch('https://api.themoviedb.org/3/discover/movie', options)
+    .then(res => res.json())
+    .then(json => setMovieList(json.results))
+  }, []); // populates movieList with discover results upon opening homepage
+
+  const getResults=(searchTerm)=>{
+    fetch('https://api.themoviedb.org/3/search/movie?query='+searchTerm+'&include_adult=false&language=en-US&page=1', options)
+    .then(res => res.json())
+    .then(json => setMovieList(json.results))
+  }; // populates movieList with search results using string inputted
 
   const handleChange = (event) => {
     const newText = event.target.value;
     setInputText(newText);
     getResults(newText);
-  };
-
-  const getResults=(searchTerm)=>{
-        fetch('https://api.themoviedb.org/3/search/movie?query='+searchTerm+'&include_adult=false&language=en-US&page=1', options)
-        .then(res => res.json())
-        .then(json => setMovieList(json.results))
-      }
+  }; // scrapes text input and feeds term to search
 
   const handleLogout = async () => {
     setError("");
@@ -54,8 +60,8 @@ function Fetch() {
             value={inputText}
             onChange={handleChange}
             />
-        </div>
-        
+      </div>
+
       {error && <Alert variant="danger">{error}</Alert>}
         <div style={{ position: 'absolute',top:'20px', right:'20px', zIndex: 1000 }}>
           <Button onClick={toggleDropdown}>
