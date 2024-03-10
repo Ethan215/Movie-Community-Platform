@@ -61,6 +61,7 @@ export default function Thriller() {
             }}
             >
               <Link to={`/user/${currentUser?.username}`} style={{  marginBottom: '10px' }}>My Account</Link>
+              <Link to={`/user/${currentUser?.username}/privateWrapped`} style={{  marginBottom: '10px', display: 'block'}}>Wrapped</Link>
               <button 
               onClick={handleLogout}
               style={{

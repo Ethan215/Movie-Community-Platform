@@ -9,7 +9,7 @@ import MovieDetail from "./MovieDetail";
 import UserPage from "./UserPage";
 import Navbar from "./navbar/Navbar";
 import Discover from "./navbar/Discover";
-import New from "./navbar/New";
+import Upcoming from "./navbar/Upcoming";
 import Action from "./genres/Action";
 import Adventure from "./genres/Adventure";
 import Animation from "./genres/Animation";
@@ -22,6 +22,8 @@ import Mystery from "./genres/Mystery";
 import Romance from "./genres/Romance";
 import Scifi from "./genres/Scifi";
 import Thriller from "./genres/Thriller";
+import "./components/PrivateWrapped";
+import PrivateWrapped from "./components/PrivateWrapped";
 
 function App() {
   const location = useLocation();
@@ -42,7 +44,7 @@ function App() {
           <Route path ="/user/:username/privateWrapped" element = {<PrivateWrapped />} />
 
           <Route path ="discover" element = {<Discover />} />
-          <Route path ="new" element = {<New />} />
+          <Route path ="upcoming" element = {<Upcoming />} />
           
           <Route path ="action" element = {<Action />} />
           <Route path ="adventure" element = {<Adventure />} />
