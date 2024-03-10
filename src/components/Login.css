@@ -1,0 +1,98 @@
+/* login.css */
+
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Use full height to center vertically */
+    background-color: #f4f4f4; /* Background color for the login page */
+  }
+  
+  .login-card {
+    width: 100%;
+    max-width: 400px; /* Maximum width of the card */
+    border: 1px solid #ccc; /* Optional: adds a border to the card */
+    padding: 2rem; /* Padding inside the card */
+    background-color: #fff; /* Background color for the card */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Box shadow for a subtle depth effect */
+    border-radius: 8px; /* Rounded corners for the card */
+  }
+  
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .login-header {
+    color: #333;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+  
+  .form-group {
+    width: 107%; /* Ensures form inputs take up the full width of the card */
+    margin-bottom: rem; /* Spacing between form groups */
+  }
+  
+  .form-control {
+    width: 100%; /* Ensures inputs take up the full width of their container */
+    padding: 0.5rem; /* Padding inside the inputs */
+    border: 1px solid #ccc; /* Border for the inputs */
+    border-radius: 4px; /* Rounded corners for the inputs */
+    margin-bottom: 1rem; /* Space below the inputs */
+  }
+  
+  .login-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    margin-top: 15px;
+    width: 100%;
+    cursor: pointer;
+  }
+  
+  .login-button:disabled {
+    background-color: #5a5a5a; /* Darker background for the disabled state */
+  }
+  
+  .login-button:hover {
+    background-color: #0056b3; /* Slightly darker blue on hover */
+  }
+  
+  .alert {
+    width: 100%; /* Alerts take the full width of the card */
+    padding: 1rem; /* Padding inside alerts */
+    margin-bottom: 1rem; /* Space below alerts */
+    text-align: center; /* Centered text for alerts */
+    border-radius: 4px; /* Rounded corners for alerts */
+  }
+  
+  .alert-danger {
+    background-color: #f8d7da; /* Red background for danger alerts */
+    color: #721c24; /* Dark text for contrast */
+  }
+  
+  .alert-success {
+    background-color: #d4edda; /* Green background for success alerts */
+    color: #155724; /* Dark text for contrast */
+  }
+  
+  .login-links {
+    width: 100%;
+    margin-top: 12px;
+    text-align: center;
+  }
+  
+  .login-link {
+    color: #007bff;
+    text-decoration: none;
+    margin-top: 0.5rem; /* Consistent margin for links */
+  }
+  
+  .login-link:hover {
+    text-decoration: underline;
+  }
+  

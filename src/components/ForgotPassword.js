@@ -1,7 +1,8 @@
 import React, { useRef, useState } from "react"
-import { Form, Button, Card, Alert } from "react-bootstrap"
+// import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuthUser } from "../contexts/AuthUserContext"
 import { Link } from "react-router-dom"
+import "./ForgotPassword.css"
 
 export default function ForgotPassword() {
   const emailRef = useRef()
@@ -27,30 +28,34 @@ export default function ForgotPassword() {
     setLoading(false)
   }
 
-  return (
-    <>
-      <Card>
-        <Card.Body>
-          <h2 className="text-center mb-4">Password Reset</h2>
-          {error && <Alert variant="danger">{error}</Alert>}
-          {message && <Alert variant="success">{message}</Alert>}
-          <Form onSubmit={handleSubmit}>
-            <Form.Group id="email">
-              <Form.Label>Email</Form.Label>
-              <Form.Control type="email" ref={emailRef} required />
-            </Form.Group>
-            <Button disabled={loading} className="w-100" type="submit">
+    return (
+      <div className="forgot-password-container">
+        <div className="forgot-password-card">
+          <h2 className="forgot-password-header">Password Reset</h2>
+          {error && <div className="alert alert-danger">{error}</div>}
+          {message && <div className="alert alert-success">{message}</div>}
+          <form className="forgot-password-form" onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                ref={emailRef}
+                required
+                className="form-control"
+              />
+            </div>
+            <button disabled={loading} className="forgot-password-button" type="submit">
               Reset Password
-            </Button>
-          </Form>
-          <div className="w-100 text-center mt-3">
-            <Link to="/login">Login</Link>
+            </button>
+          </form>
+          <div className="forgot-password-signup-link">
+            <Link className="forgot-password-link" to="/login">Login</Link>
           </div>
-        </Card.Body>
-      </Card>
-      <div className="w-100 text-center mt-2">
-        Need an account? <Link to="/signup">Sign Up</Link>
+          <div className="forgot-password-signup-link">
+            Need an account? <Link className="forgot-password-link" to="/signup">Sign Up</Link>
+          </div>
+        </div>
       </div>
-    </>
-  )
+    )
 }

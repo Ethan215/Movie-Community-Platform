@@ -6,7 +6,6 @@ import Login from "./components/Login";
 import ForgotPassword from "./components/ForgotPassword";
 import Fetch from "./Fetch"; 
 import MovieDetail from "./MovieDetail"; 
-import { Container } from 'react-bootstrap';
 import UserPage from "./UserPage";
 
 function App() {
@@ -20,25 +19,12 @@ function App() {
           <Route path="/movie/:id" element={<MovieDetail />} />
           <Route path ="/user/:username" element = {<UserPage />} />
           {/* User Authentication Routing */}
-          <Route path="/signup" element={<ContainerComponent><Signup /></ContainerComponent>} />
-          <Route path="/login" element={<ContainerComponent><Login /></ContainerComponent>} />
-          <Route path="/forgot-password" element={<ContainerComponent><ForgotPassword /></ContainerComponent>} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
         </Routes>
       </AuthUserProvider>
     </Router>
-  );
-}
-// Shared layout components
-function ContainerComponent({ children }) {
-  return (
-    <Container
-      className="d-flex align-items-center justify-content-center"
-      style={{ minHeight: "100vh" }}
-    >
-      <div className="w-100" style={{ maxWidth: "400px" }}>
-        {children}
-      </div>
-    </Container>
   );
 }
 
