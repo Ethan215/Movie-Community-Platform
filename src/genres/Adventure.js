@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuthUser } from "../contexts/AuthUserContext";
 import { Button, Alert } from "react-bootstrap";
 
-export default function Action() {
+export default function Adventure() {
   // Declare state variables for movie list, error, and logout function
   const [movieList, setMovieList] = useState([]);
   const [error, setError] = useState("");
@@ -61,6 +61,7 @@ export default function Action() {
             }}
             >
               <Link to={`/user/${currentUser?.username}`} style={{  marginBottom: '10px' }}>My Account</Link>
+              <Link to={`/user/${currentUser?.username}/privateWrapped`} style={{  marginBottom: '10px', display: 'block'}}>Wrapped</Link>
               <button 
               onClick={handleLogout}
               style={{

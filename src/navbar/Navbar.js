@@ -27,7 +27,7 @@ export default function Navbar() {
                 <a href="/discover">Discover</a>
             </li>
             <li>    
-                <a href="/new">New</a>
+                <a href="/upcoming">Upcoming</a>
             </li>
             
         </ul>
