@@ -7,7 +7,7 @@ function Fetch() {
   const [movieList, setMovieList] = useState([]);
   const [error, setError] = useState("");
   const { logout } = useAuthUser();
-  const navigate = useNavigate();  
+  const navigate = useNavigate();
   // Declare state variables for current user and show dropdown
   const { currentUser } = useAuthUser();
   const [showDropdown, setShowDropDown] = useState(false);
@@ -53,7 +53,7 @@ function Fetch() {
 
   // Toggle drop-down menu function
   const toggleDropdown = () => setShowDropDown(!showDropdown);
-  
+
   return (
     <>
       <h1 style={{ textAlign: 'center' }}>Search for a movie!</h1>
@@ -83,8 +83,9 @@ function Fetch() {
 
             }}
             >
-              <Link to={`/user/${currentUser?.username}`} style={{  marginBottom: '10px' }}>My Account</Link>
-              <button 
+              <Link to={`/user/${currentUser?.username}`} style={{  marginBottom: '10px', display: 'block' }}>My Account</Link>
+              <Link to={`/user/${currentUser?.username}/privateWrapped`} style={{  marginBottom: '10px', display: 'block'}}>Wrapped</Link>
+              <button
               onClick={handleLogout}
               style={{
               background: 'none',
@@ -104,18 +105,18 @@ function Fetch() {
       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', marginTop: '20px' }}>
         {movieList.map((movie) => (
           <Link to={`/movie/${movie.id}`} key={movie.id} style={{ textDecoration: 'none' }}>
-            <img 
-              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} 
-              alt={movie.title} 
-              style={{ 
-                width: '270px', 
-                height: '400px', 
-                margin: '20px', 
+            <img
+              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              alt={movie.title}
+              style={{
+                width: '270px',
+                height: '400px',
+                margin: '20px',
                 transition: 'transform 0.2s', // Adds a smooth transition effect on hover
                 '&:hover': {
                   transform: 'scale(1.05)', // Slightly increase the size on hover
                 }
-              }} 
+              }}
             />
           </Link>
         ))}
