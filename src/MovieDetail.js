@@ -18,7 +18,7 @@ function MovieDetail() {
   const [reviewText, setReviewText] = useState('');
   const [rating, setRating] = useState(5); 
   const [errorMessage, setErrorMessage] = useState('');
-  
+  const [errorWatchlist, setErrorWatchlist] = useState('');
   
   const fetchReviews = useCallback(async () => {
     try {
@@ -117,6 +117,27 @@ function MovieDetail() {
     }
   };
 
+  //function to add movie to watchlist
+  const addMovieToWatchlist = async (e) => {
+    e.preventDefault(); 
+    
+    try {
+      const q = query(collection(db, "watchlist"), where("username", "==", currentUser.username), where("movie_Id", "==", id));
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.empty) { // Check if the movie is already in the user's watchlist
+        setErrorWatchlist("This movie is already in your watchlist.");
+      } else { // Add movie to watchlist
+        await addDoc(collection(db, "watchlist"), {
+          username: currentUser.username,
+          movie_Id: id
+        });
+      }
+
+    } catch (error) {
+      console.error("Error adding movie to watchlist:", error);
+    }
+  };
+
   if (!movie) {
     return <div>Movie Doesn't Exist</div>;
   }
@@ -138,6 +159,10 @@ function MovieDetail() {
         <div>
             <h1>{movie.title}</h1>
             <p>{`Synopsis: ${movie.overview}`}</p>
+            {errorWatchlist && <Alert variant="danger">{errorWatchlist}</Alert>}
+            {currentUser && (
+              <button onClick={addMovieToWatchlist}className = "watchlist-button">Add to Watchlist</button>
+            )}
         </div>
         </div>
         <div>

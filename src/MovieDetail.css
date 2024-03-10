@@ -12,3 +12,18 @@
   .home-button:hover {
     background-color: #0056b3;
   }
+
+  .watchlist-button {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+  }
+
+  .watchlist-button:hover {
+    background-color: #0056b3;
+  }
