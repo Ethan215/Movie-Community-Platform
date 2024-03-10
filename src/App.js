@@ -2,11 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthUserProvider } from "./contexts/AuthUserContext";
 import Signup from "./components/Signup";
-// import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
-import PrivateRoute from "./components/PrivateRoute";
 import ForgotPassword from "./components/ForgotPassword";
-import UpdateProfile from "./components/UpdateProfile";
 import Fetch from "./Fetch"; 
 import MovieDetail from "./MovieDetail"; 
 import { Container } from 'react-bootstrap';
@@ -17,26 +14,21 @@ function App() {
     <Router>
       <AuthUserProvider>
         <Routes>
-          {/* 主界面路由 */}
+          {/* Main interface routing */}
           <Route path="/" element={<Login />} ></Route>
           <Route path="/home" element={<Fetch />} />
           <Route path="/movie/:id" element={<MovieDetail />} />
           <Route path ="/user/:username" element = {<UserPage />} />
-          {/* 用户认证路由 */}
+          {/* User Authentication Routing */}
           <Route path="/signup" element={<ContainerComponent><Signup /></ContainerComponent>} />
           <Route path="/login" element={<ContainerComponent><Login /></ContainerComponent>} />
           <Route path="/forgot-password" element={<ContainerComponent><ForgotPassword /></ContainerComponent>} />
-          
-          {/* 保护的路由 */}
-          {/* <Route path="/" element={<ContainerComponent><PrivateRoute><Dashboard /></PrivateRoute></ContainerComponent>} /> */}
-          <Route path="/update-profile" element={<ContainerComponent><PrivateRoute><UpdateProfile /></PrivateRoute></ContainerComponent>} />
         </Routes>
       </AuthUserProvider>
     </Router>
   );
 }
-
-// 将共享的布局组件抽象出来
+// Shared layout components
 function ContainerComponent({ children }) {
   return (
     <Container

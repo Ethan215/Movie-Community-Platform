@@ -12,8 +12,6 @@ export default function Signup() {
   const passwordConfirmRef = useRef()
   const usernameRef = useRef()
   const { signup } = useAuthUser()
-  // Destructure signup from the useAuth context
-  //const { signup } = useAuth()
   // Create state for error and loading
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
