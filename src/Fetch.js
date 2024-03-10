@@ -3,12 +3,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuthUser } from "./contexts/AuthUserContext";
 import { Button, Alert } from "react-bootstrap";
 function Fetch() {
+  // Declare state variables for movie list, error, and logout function
   const [movieList, setMovieList] = useState([]);
   const [error, setError] = useState("");
   const { logout } = useAuthUser();
   const navigate = useNavigate();
+  // Declare state variables for current user and show dropdown
   const { currentUser } = useAuthUser();
   const [showDropdown, setShowDropDown] = useState(false);
+  // Declare state variable for input text
   const [inputText, setInputText] = useState('');
 
 
@@ -48,11 +51,12 @@ function Fetch() {
     }
   };
 
+  // Toggle drop-down menu function
   const toggleDropdown = () => setShowDropDown(!showDropdown);
 
   return (
     <>
-      <h1 style={{ textAlign: 'center' }}>Let's search for a movie!</h1>
+      <h1 style={{ textAlign: 'center' }}> </h1>
       <div style={{ textAlign: 'center' }}>
         <input
             type="text"
@@ -65,7 +69,7 @@ function Fetch() {
       {error && <Alert variant="danger">{error}</Alert>}
         <div style={{ position: 'absolute',top:'20px', right:'20px', zIndex: 1000 }}>
           <Button onClick={toggleDropdown}>
-            {currentUser?.username}
+            {currentUser?.username}    {/*Display User name */}
           </Button>
           {showDropdown && (
             <div style = {{

@@ -4,7 +4,7 @@ import { useAuthUser } from "../contexts/AuthUserContext"
 import { Link, useNavigate } from "react-router-dom"
 import { db } from "../contexts/firebase"
 import { collection, addDoc, where, query, getDocs } from "firebase/firestore";
-
+import "./Signup.css"
 export default function Signup() {
   // Create references for the email, password, and password confirm inputs
   const emailRef = useRef()
@@ -12,8 +12,6 @@ export default function Signup() {
   const passwordConfirmRef = useRef()
   const usernameRef = useRef()
   const { signup } = useAuthUser()
-  // Destructure signup from the useAuth context
-  //const { signup } = useAuth()
   // Create state for error and loading
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
@@ -60,43 +58,38 @@ export default function Signup() {
   }
 
   return (
-    <>
-      <Card>
-        <Card.Body>
-          <h2 className="text-center mb-4">Sign Up</h2>
-          {/* Display any errors */}
-          {error && <Alert variant="danger">{error}</Alert>}
-          {/* Display error related to username being taken */}
-          {errorText && <Alert variant="danger">{errorText}</Alert>}
-          {/* Display sign up form table */}
-          <Form onSubmit={handleSubmit}>
-            <Form.Group id="email">
-              <Form.Label>Email</Form.Label>
-              <Form.Control type="email" ref={emailRef} required />
-            </Form.Group>
-            <Form.Group id="password">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" ref={passwordRef} required />
-            </Form.Group>
-            <Form.Group id="password-confirm">
-              <Form.Label>Password Confirmation</Form.Label>
-              <Form.Control type="password" ref={passwordConfirmRef} required />
-            </Form.Group>
-            <Form.Group id="username">
-              <Form.Label>Username</Form.Label>
-              <Form.Control type="text" ref={usernameRef} required />
-            </Form.Group>
-            {/* Disable the button if loading */}
-            <Button disabled={loading} className="w-100" type="submit">
+    <div className="signup-container">
+      <div className="signup-card">
+        <div className="signup-body">
+          <h2 className="signup-header">Sign Up</h2>
+          {error && <div className="alert alert-danger">{error}</div>}
+          {errorText && <div className="alert alert-danger">{errorText}</div>}
+          <form className="signup-form" onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label>Email</label>
+              <input type="email" ref={emailRef} required />
+            </div>
+            <div className="form-group">
+              <label>Password</label>
+              <input type="password" ref={passwordRef} required />
+            </div>
+            <div className="form-group">
+              <label>Password Confirmation</label>
+              <input type="password" ref={passwordConfirmRef} required />
+            </div>
+            <div className="form-group">
+              <label>Username</label>
+              <input type="text" ref={usernameRef} required />
+            </div>
+            <button disabled={loading} type="submit">
               Sign Up
-            </Button>
-          </Form>
-        </Card.Body>
-      </Card>
-      <div className="w-100 text-center mt-2">
-        {/* Link to the login page */}
+            </button>
+          </form>
+        </div>
+      </div>
+      <div className="login-link-container">
         Already have an account? <Link to="/login">Log In</Link>
       </div>
-    </>
-  )
+    </div>
+  );
 }
