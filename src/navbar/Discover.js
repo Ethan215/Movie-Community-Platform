@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuthUser } from "./contexts/AuthUserContext";
+import { useAuthUser } from "../contexts/AuthUserContext";
 import { Button, Alert } from "react-bootstrap";
-function Fetch() {
+export default function Discover() {
   // Declare state variables for movie list, error, and logout function
   const [movieList, setMovieList] = useState([]);
   const [error, setError] = useState("");
@@ -11,8 +11,6 @@ function Fetch() {
   // Declare state variables for current user and show dropdown
   const { currentUser } = useAuthUser();
   const [showDropdown, setShowDropDown] = useState(false);
-  // Declare state variable for input text
-  const [inputText, setInputText] = useState('');
 
 
   const options = {
@@ -27,19 +25,7 @@ function Fetch() {
     fetch('https://api.themoviedb.org/3/discover/movie', options)
     .then(res => res.json())
     .then(json => setMovieList(json.results))
-  }, []); // populates movieList with discover results upon opening homepage
-
-  const getResults=(searchTerm)=>{
-    fetch('https://api.themoviedb.org/3/search/movie?query='+searchTerm+'&include_adult=false&language=en-US&page=1', options)
-    .then(res => res.json())
-    .then(json => setMovieList(json.results))
-  }; // populates movieList with search results using string inputted
-
-  const handleChange = (event) => {
-    const newText = event.target.value;
-    setInputText(newText);
-    getResults(newText);
-  }; // scrapes text input and feeds term to search
+  }, []); // populates movieList with discover results
 
   const handleLogout = async () => {
     setError("");
@@ -56,16 +42,6 @@ function Fetch() {
   
   return (
     <>
-      <h1 style={{ textAlign: 'center' }}>Search for a movie!</h1>
-      <div style={{ textAlign: 'center' }}> 
-        <input
-            type="text"
-            placeholder="Enter a movie title..."
-            value={inputText}
-            onChange={handleChange}
-            />
-      </div>
-
       {error && <Alert variant="danger">{error}</Alert>}
         <div style={{ position: 'absolute',top:'20px', right:'20px', zIndex: 1000 }}>
           <Button onClick={toggleDropdown}>
@@ -123,5 +99,3 @@ function Fetch() {
     </>
   );
 }
-
-export default Fetch;
