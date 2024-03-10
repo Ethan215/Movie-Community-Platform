@@ -4,8 +4,8 @@ import { AuthUserProvider } from "./contexts/AuthUserContext";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import ForgotPassword from "./components/ForgotPassword";
-import Fetch from "./Fetch"; 
-import MovieDetail from "./MovieDetail"; 
+import Fetch from "./Fetch";
+import MovieDetail from "./MovieDetail";
 import UserPage from "./UserPage";
 import Navbar from "./navbar/Navbar";
 import Discover from "./navbar/Discover";
@@ -23,7 +23,6 @@ import Romance from "./genres/Romance";
 import Scifi from "./genres/Scifi";
 import Thriller from "./genres/Thriller";
 
-
 function App() {
   const location = useLocation();
   const isEmptyPath = (location.pathname === '/');
@@ -40,6 +39,7 @@ function App() {
           <Route path="/home" element={<Fetch />} />
           <Route path="/movie/:id" element={<MovieDetail />} />
           <Route path ="/user/:username" element = {<UserPage />} />
+          <Route path ="/user/:username/privateWrapped" element = {<PrivateWrapped />} />
 
           <Route path ="discover" element = {<Discover />} />
           <Route path ="new" element = {<New />} />
@@ -56,8 +56,6 @@ function App() {
           <Route path ="mystery" element = {<Mystery />} />
           <Route path ="scifi" element = {<Scifi />} />
           <Route path ="thriller" element = {<Thriller />} />
-
-
           {/* User Authentication Routing */}
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />

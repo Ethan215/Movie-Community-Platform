@@ -1,0 +1,95 @@
+{
+    "Header": {
+      "title": "Your Private Wrapped",
+      "paragraph": "See what your Top Movies and shows are!"
+    },
+    "About": {
+      "paragraph": "A true Movie and Show Connoisseur!",
+      "Why": [
+        "Top Movie #1",
+        "Top Movie #2",
+        "Top Movie #3"
+      ],
+      "Why2": [
+        "Top Show #1",
+        "Top Show #2",
+        "Top Show #3"
+      ]
+    },
+    "Shows": [
+      {
+        "img": "img/testimonials/01.jpg",
+        "name": "Show #1",
+        "text": "Show Description?"
+      },
+      {
+        "img": "img/testimonials/02.jpg",
+        "name": "Show #2",
+        "text": "Show Description?"
+      },
+      {
+        "img": "img/testimonials/03.jpg",
+        "name": "Show #3",
+        "text": "Show Description?"
+      },
+      {
+        "img": "img/testimonials/04.jpg",
+        "name": "Show #4",
+        "text": "Show Description?"
+      },
+      {
+        "img": "img/testimonials/05.jpg",
+        "name": "Show #5",
+        "text": "Show Description?"
+      },
+      {
+        "img": "img/testimonials/05.jpg",
+        "name": "Show #6",
+        "text": "Show Description?"
+      }
+    ],
+    "Movies": [
+      {
+        "img": "img/team/01.jpg",
+        "name": "Movie #1",
+        "job": "Movie #1 Genre and Year"
+      },
+      {
+        "img": "img/team/02.jpg",
+        "name": "Movie #2",
+        "job": "Movie #2 Genre and Year"
+      },
+      {
+        "img": "img/team/03.jpg",
+        "name": "Movie #3",
+        "job": "Movie #3 Genre and Year"
+      },
+      {
+        "img": "img/team/03.jpg",
+        "name": "Movie #4",
+        "job": "Movie #4 Genre and Year"
+      },
+      {
+        "img": "img/team/04.jpg",
+        "name": "Movie #5",
+        "job": "Movie #5 Genre and Year"
+      }
+    ],
+    "Genres": [
+      {
+        "img": "path/to/your/image1.jpg",
+        "title": "Genre #1",
+        "text": "Favorite Movie from Genre #1"
+      },
+      {
+        "img": "path/to/your/image2.jpg",
+        "title": "Genre #2",
+        "text": "Favorite Movie from Genre #2"
+      },
+      {
+        "img": "path/to/your/image3.jpg",
+        "title": "Genre #3",
+        "text": "Favorite Movie from Genre #3"
+      }
+    ]
+  }
