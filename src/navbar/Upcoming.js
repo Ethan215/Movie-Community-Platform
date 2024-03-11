@@ -13,19 +13,20 @@ function Upcoming() {
   const [showDropdown, setShowDropDown] = useState(false);
 
 
-  const options = {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YTkwODE5MTAxZDA5MWQ5MTBjYzE0ZjdkZDdmYWE1NSIsInN1YiI6IjY1YmYzZjgyYmE0ODAyMDE4MjZjMWE5YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.KOl14U2aSpIol1hFgSSBS0GBwxlPJ7PcBKOzKYqc8gM'
-    }
-  };  // simplifies fetch calls: insert 'options' as secondary parameter in any fetch, no API key needed!
-
   useEffect(() => {
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: 'Bearer token'
+      }
+    };
+  
     fetch('https://api.themoviedb.org/3/movie/upcoming', options)
-    .then(res => res.json())
-    .then(json => setMovieList(json.results))
-  }, []); // populates movieList with upcoming results
+      .then(res => res.json())
+      .then(json => setMovieList(json.results))
+  }, []);// populates movieList with upcoming results
+        // The dependency array is empty, because internally defined options do not cause the effect to be re-executed.
 
   const handleLogout = async () => {
     setError("");

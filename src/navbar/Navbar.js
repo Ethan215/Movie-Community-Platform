@@ -2,7 +2,7 @@ export default function Navbar() {
     return <nav className="navbar">
         <ul>
             <li>    
-                <a href="/home">Search</a>
+                <a href="/home">Home</a>
             </li>  
             <li>    
                 <div className="dropdown">
@@ -23,9 +23,9 @@ export default function Navbar() {
                     </div>
                 </div>
             </li>
-            <li>
+            {/* <li>
                 <a href="/discover">Discover</a>
-            </li>
+            </li> */}
             <li>    
                 <a href="/upcoming">Upcoming</a>
             </li>
