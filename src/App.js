@@ -27,14 +27,14 @@ import PrivateWrapped from "./components/PrivateWrapped";
 
 function App() {
   const location = useLocation();
-  const isEmptyPath = (location.pathname === '/');
+  const shouldHideNavbar = location.pathname === '/' || location.pathname === '/login';
 
 
   return (
     <>
       <AuthUserProvider>
       
-      {!isEmptyPath && <Navbar />}
+      {!shouldHideNavbar && <Navbar />}
 
         <Routes>
           <Route path="/" element={<Login />} ></Route>
