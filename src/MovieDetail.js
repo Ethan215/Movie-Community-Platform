@@ -19,6 +19,7 @@ function MovieDetail() {
   const [rating, setRating] = useState(5); 
   const [errorMessage, setErrorMessage] = useState('');
   const [errorWatchlist, setErrorWatchlist] = useState('');
+  const [isInWatchlist, setIsInWatchlist] = useState(false);
   
   const fetchReviews = useCallback(async () => {
     try {
@@ -51,6 +52,22 @@ function MovieDetail() {
     fetchMovie();
     fetchReviews();
   }, [id, fetchReviews]); 
+
+  useEffect(() => {
+    const checkIsInWatchlist = async () => {
+      try {
+        const q = query(collection(db, "watchlist"), where("username", "==", currentUser.username), where("movie_id", "==", id));
+        const querySnapshot = await getDocs(q);
+        setIsInWatchlist(!querySnapshot.empty);
+      } catch (error) {
+        console.error("Error checking watchlist:", error);
+      }
+    };
+
+    if (currentUser) {
+      checkIsInWatchlist();
+    }
+  }, [currentUser, id]);
   
 
   const handleSaveEdit = async (reviewId) => {
@@ -117,24 +134,34 @@ function MovieDetail() {
     }
   };
 
-  //function to add movie to watchlist
-  const addMovieToWatchlist = async (e) => {
+  //function to add movie to watchlist, but also able to remove movie from watchlist
+  const addOrRemoveMovieFromWatchlist = async (e) => {
     e.preventDefault(); 
     
     try {
-      const q = query(collection(db, "watchlist"), where("username", "==", currentUser.username), where("movie_Id", "==", id));
-      const querySnapshot = await getDocs(q);
-      if (!querySnapshot.empty) { // Check if the movie is already in the user's watchlist
-        setErrorWatchlist("This movie is already in your watchlist.");
-      } else { // Add movie to watchlist
+      if (isInWatchlist) { // If movie is in watchlist, remove it
+        const q = query(collection(db, "watchlist"), where("username", "==", currentUser.username), where("movie_id", "==", id));
+        const querySnapshot = await getDocs(q);
+        if (!querySnapshot.empty) {
+          querySnapshot.forEach(async (doc) => {
+            await deleteDoc(doc.ref);
+          });
+          setIsInWatchlist(false);
+          setErrorWatchlist("Movie removed from your watchlist.");
+        }
+      } else { // If movie is not in watchlist, add it
         await addDoc(collection(db, "watchlist"), {
           username: currentUser.username,
-          movie_Id: id
+          movie_id: id,
+          movie_title: movie.title,
+          movie_poster_path: movie.poster_path
         });
+        setIsInWatchlist(true);
+        setErrorWatchlist("Movie added to your watchlist.");
       }
 
     } catch (error) {
-      console.error("Error adding movie to watchlist:", error);
+      console.error("Error adding or removing movie from watchlist:", error);
     }
   };
 
@@ -161,7 +188,9 @@ function MovieDetail() {
             <p>{`Synopsis: ${movie.overview}`}</p>
             {errorWatchlist && <Alert variant="danger">{errorWatchlist}</Alert>}
             {currentUser && (
-              <button onClick={addMovieToWatchlist}className = "watchlist-button">Add to Watchlist</button>
+            <button onClick={addOrRemoveMovieFromWatchlist} className="watchlist-button">
+              {isInWatchlist ? "Remove from Watchlist" : "Add to Watchlist"}
+            </button>
             )}
         </div>
         </div>
