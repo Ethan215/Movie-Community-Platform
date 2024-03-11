@@ -32,7 +32,7 @@ export default function Adventure() {
     setError("");
     try {
       await logout();
-      navigate("/login");
+      navigate("/");
     } catch (error) {
       setError("Failed to log out");
     }

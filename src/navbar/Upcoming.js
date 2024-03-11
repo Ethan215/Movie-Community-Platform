@@ -13,10 +13,7 @@ function Upcoming() {
   const [showDropdown, setShowDropDown] = useState(false);
 
 
-  
-
-  useEffect(() => {
-const options = {
+  const options = {
     method: 'GET',
     headers: {
       accept: 'application/json',
@@ -24,6 +21,7 @@ const options = {
     }
   };  // simplifies fetch calls: insert 'options' as secondary parameter in any fetch, no API key needed!
 
+  useEffect(() => {
     fetch('https://api.themoviedb.org/3/movie/upcoming', options)
     .then(res => res.json())
     .then(json => setMovieList(json.results))
@@ -33,7 +31,7 @@ const options = {
     setError("");
     try {
       await logout();
-      navigate("/login");
+      navigate("/");
     } catch (error) {
       setError("Failed to log out");
     }

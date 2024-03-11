@@ -32,7 +32,7 @@ export default function Comedy() {
     setError("");
     try {
       await logout();
-      navigate("/login");
+      navigate("/");
     } catch (error) {
       setError("Failed to log out");
     }
@@ -61,6 +61,7 @@ export default function Comedy() {
             }}
             >
               <Link to={`/user/${currentUser?.username}`} style={{  marginBottom: '10px' }}>My Account</Link>
+              <Link to={`/user/${currentUser?.username}/privateWrapped`} style={{  marginBottom: '10px', display: 'block'}}>Wrapped</Link>
               <button 
               onClick={handleLogout}
               style={{
@@ -81,7 +82,6 @@ export default function Comedy() {
       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', marginTop: '20px' }}>
         {movieList.map((movie) => (
           <Link to={`/movie/${movie.id}`} key={movie.id} style={{ textDecoration: 'none' }}>
-          <Link to={`/user/${currentUser?.username}/privateWrapped`} style={{  marginBottom: '10px', display: 'block'}}>Wrapped</Link>
             <img 
               src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} 
               alt={movie.title} 
