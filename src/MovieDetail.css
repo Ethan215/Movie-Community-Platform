@@ -82,6 +82,16 @@
   flex-direction: column; /* Make labels and text areas vertically aligned */
 }
 
+.reviewer-name-link {
+  text-decoration: none;
+  color: inherit; 
+}
+
+.reviewer-name-link:hover {
+  text-decoration: underline; 
+  color: blue; 
+}
+
 .review-textarea {
   margin-top: 0.5em; 
   min-height: 100px; 
