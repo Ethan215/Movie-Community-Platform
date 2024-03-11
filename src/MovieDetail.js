@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { Alert } from "react-bootstrap"
 import { db } from './contexts/firebase';
 import { collection, addDoc, where, query, serverTimestamp, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
-import { useParams} from 'react-router-dom';
+import { Link, useParams} from 'react-router-dom';
 import './MovieDetail.css'
 import { useAuthUser } from './contexts/AuthUserContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -95,7 +95,10 @@ function MovieDetail() {
       await updateDoc(reviewDoc, {
         rating: Number(editRating),
         review_text: editReviewText,
-        edited_at: serverTimestamp()
+        edited_at: serverTimestamp(),
+        public: true,
+        movie_poster_path: movie.poster_path,
+        movie_name: movie.title
       });
       // Exit editing mode
       setEditingReviewId(null);
@@ -153,7 +156,10 @@ function MovieDetail() {
           rating: Number(rating),
           review_text: reviewText,
           username: currentUser.username,
-          created_at: serverTimestamp()
+          created_at: serverTimestamp(),
+          public: true,
+          movie_poster_path: movie.poster_path,
+          movie_name: movie.title
         });
       }
       // Clear the state variables
@@ -263,7 +269,7 @@ function MovieDetail() {
             <div className="review-block" key={review.id}>
               <div className="review-content">
                 {/*This is the section for displaying Review */}
-                <span className="reviewer-name">{review.username}</span>
+                <Link to={`/user/${review.username}`} className="reviewer-name-link">{review.username}</Link>
                     <div className="static-stars">
                       {/* Display user rating scores based on editorial ratings (total of 5) */}
                       {[...Array(5)].map((_, index) => (
