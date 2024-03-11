@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAuthUser } from './contexts/AuthUserContext';
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
 import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
+import UserDropdown from "./UserDropdown";
 
 function UserPage(){
     const {username} = useParams();
@@ -64,6 +65,7 @@ function UserPage(){
     }
 
     return(
+        <>
         <div>
         <div>
         <h1>Watchlist</h1>
@@ -144,8 +146,10 @@ function UserPage(){
         )}
       </div>
 
-
+      
 </div>
+<UserDropdown/>
+</>
 
     );
 }

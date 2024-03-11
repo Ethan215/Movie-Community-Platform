@@ -8,7 +8,11 @@ import { useAuthUser } from './contexts/AuthUserContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
 import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
+<<<<<<< HEAD
 import EditReviewModal from './EditReviewModal';
+=======
+import UserDropdown from "./UserDropdown";
+>>>>>>> 85557b0 (added profile dropdown to all pages)
 
 function MovieDetail() {
   // State variables for rating and review text
@@ -208,6 +212,7 @@ function MovieDetail() {
   }  
   // Render the movie details and review form
   return (
+    <>
     <div className="movie-container">
        {/* Display Move Information  */}
         <div className="movie-info">
@@ -320,6 +325,8 @@ function MovieDetail() {
         )}
       </div>
     </div>
+    <UserDropdown />
+    </>
   );
 }
 
