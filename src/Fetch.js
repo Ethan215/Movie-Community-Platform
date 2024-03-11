@@ -57,7 +57,7 @@ function Fetch() {
   return (
     <>
       <h1 style={{ textAlign: 'center' }}>Search for a movie!</h1>
-      <div style={{ textAlign: 'center' }}> 
+      <div style={{ textAlign: 'center' }}>
         <input
             type="text"
             placeholder="Enter a movie title..."
