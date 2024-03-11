@@ -87,7 +87,7 @@ export default function Signup() {
         </div>
       </div>
       <div className="login-link-container">
-        Already have an account? <Link to="/login">Log In</Link>
+        Already have an account? <Link to="/">Log In</Link>
       </div>
     </div>
   );

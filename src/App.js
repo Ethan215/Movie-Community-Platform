@@ -28,14 +28,11 @@ import PrivateWrapped from "./components/PrivateWrapped";
 function App() {
   const location = useLocation();
   const shouldHideNavbar = location.pathname === '/' || location.pathname === '/login';
-
-
   return (
     <>
       <AuthUserProvider>
       
       {!shouldHideNavbar && <Navbar />}
-
         <Routes>
           <Route path="/" element={<Login />} ></Route>
           <Route path="/home" element={<Fetch />} />
@@ -59,7 +56,6 @@ function App() {
           <Route path ="scifi" element = {<Scifi />} />
           <Route path ="thriller" element = {<Thriller />} />
           {/* User Authentication Routing */}
-          <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
         </Routes>

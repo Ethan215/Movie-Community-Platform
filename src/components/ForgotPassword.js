@@ -50,7 +50,7 @@ export default function ForgotPassword() {
             </button>
           </form>
           <div className="forgot-password-signup-link">
-            <Link className="forgot-password-link" to="/login">Login</Link>
+            <Link className="forgot-password-link" to="/">Login</Link>
           </div>
           <div className="forgot-password-signup-link">
             Need an account? <Link className="forgot-password-link" to="/signup">Sign Up</Link>
