@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuthUser } from "./contexts/AuthUserContext";
-import { Button, Alert } from "react-bootstrap";
+import { Link } from 'react-router-dom';
+import UserDropdown from "./UserDropdown";
+
 function Fetch() {
   // Declare state variables for movie list, error, and logout function
   const [movieList, setMovieList] = useState([]);
-  const [error, setError] = useState("");
-  const { logout } = useAuthUser();
-  const navigate = useNavigate();
-  // Declare state variables for current user and show dropdown
-  const { currentUser } = useAuthUser();
-  const [showDropdown, setShowDropDown] = useState(false);
   // Declare state variable for input text
   const [inputText, setInputText] = useState('');
+  
 
 
   const options = {
@@ -41,19 +36,6 @@ function Fetch() {
     getResults(newText);
   }; // scrapes text input and feeds term to search
 
-  const handleLogout = async () => {
-    setError("");
-    try {
-      await logout();
-      navigate("/");
-    } catch (error) {
-      setError("Failed to log out");
-    }
-  };
-
-  // Toggle drop-down menu function
-  const toggleDropdown = () => setShowDropDown(!showDropdown);
-
   return (
     <>
       <h1 style={{ textAlign: 'center' }}>Search for a movie!</h1>
@@ -65,41 +47,7 @@ function Fetch() {
             onChange={handleChange}
             />
       </div>
-
-      {error && <Alert variant="danger">{error}</Alert>}
-        <div style={{ position: 'absolute',top:'20px', right:'20px', zIndex: 1000 }}>
-          <Button onClick={toggleDropdown}>
-            {currentUser?.username}    {/*Display User name */}
-          </Button>
-          {showDropdown && (
-            <div style = {{
-              position: 'absolute',
-              top: '100%',
-              right: 0,
-              backgroundColor: 'white',
-              boxShadow: '0 8px 16px 0 rgba(0,0,0,0.2)',
-              padding: '12px 16px',
-              zIndex: 1001
-
-            }}
-            >
-              <Link to={`/user/${currentUser?.username}`} style={{  marginBottom: '10px', display: 'block' }}>My Account</Link>
-              <Link to={`/user/${currentUser?.username}/privateWrapped`} style={{  marginBottom: '10px', display: 'block'}}>Wrapped</Link>
-              <button
-              onClick={handleLogout}
-              style={{
-              background: 'none',
-              color: 'blue',
-              cursor: 'pointer',
-              textDecoration: 'underline',
-              border: 'none',
-              padding: 0,
-              font: 'inherit'
-            }}>Log Out
-            </button>
-          </div>
-          )}
-          </div>
+        <UserDropdown></UserDropdown>
 
 
       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', marginTop: '20px' }}>

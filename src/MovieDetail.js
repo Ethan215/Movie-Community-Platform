@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
 import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
 import EditReviewModal from './EditReviewModal';
+import UserDropdown from "./UserDropdown";
 
 function MovieDetail() {
   // State variables for rating and review text
@@ -208,6 +209,7 @@ function MovieDetail() {
   }  
   // Render the movie details and review form
   return (
+    <>
     <div className="movie-container">
        {/* Display Move Information  */}
         <div className="movie-info">
@@ -320,6 +322,8 @@ function MovieDetail() {
         )}
       </div>
     </div>
+    <UserDropdown />
+    </>
   );
 }
 
