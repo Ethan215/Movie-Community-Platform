@@ -8,7 +8,7 @@ import { useAuthUser } from './contexts/AuthUserContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
 import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
-
+import EditReviewModal from './EditReviewModal';
 
 function MovieDetail() {
   // State variables for rating and review text
@@ -118,19 +118,18 @@ function MovieDetail() {
     setEditingReviewId(review.id);
     // Plus, potentially open a modal or reveal the edit form
   };
-
   // Function to delete a review
   const handleDeleteReview = async (reviewId)=>{
     if (window.confirm("Delete Review? This action cannot be undone.")) {
-    try {
-      // Delete the review document from the database
-      await deleteDoc(doc(db, "reviews", reviewId));
-      // Fetch the reviews to update the state
-      fetchReviews(); // Refresh reviews after deletion
-    } catch (error) {
-      console.error("Error deleting review:", error);
+      try {
+        // Delete the review document from the database
+        await deleteDoc(doc(db, "reviews", reviewId));
+        // Fetch the reviews to update the state
+        fetchReviews(); // Refresh reviews after deletion
+      } catch (error) {
+        console.error("Error deleting review:", error);
+      }
     }
-  }
   }
   
   // Function to submit a review
@@ -200,37 +199,7 @@ function MovieDetail() {
 
   if (!movie) {
     return <div>Movie Doesn't Exist</div>;
-  }
-  function EditReviewModal({ review, editRating, setEditRating, editReviewText, setEditReviewText, onSave, onCancel }) {
-    return (
-      <div className="modal" style={{display: 'block'}}> {/* Make sure the modal box is visible */}
-        <div className="modal-content">
-          <span className="close" onClick={onCancel}>&times;</span>
-          <form className="edit-review-form" onSubmit={(e) => {
-            e.preventDefault();
-            onSave(review.id);
-          }}>
-            <div className="edit-rating ">
-              {[...Array(5)].map((_, index) => (
-                <button
-                  key={index}
-                  type="button"
-                  onClick={() => setEditRating(index + 1)}
-                  className={`star-button ${editRating > index ? 'filled' : 'empty'}`}
-                >
-                  <FontAwesomeIcon icon={fasStar} />
-                </button>
-              ))}
-            </div>
-            <label htmlFor="editReviewText" className="edit-review-label">New Review:</label>
-            <textarea  id="editReviewText" className="review-textarea" value={editReviewText} onChange={(e) => setEditReviewText(e.target.value)} />
-            <input type="submit" className="save-btn" value="Save" />
-          </form>
-        </div>
-      </div>
-    );
-  }
-  
+  }  
   // Render the movie details and review form
   return (
     <div className="movie-container">
@@ -286,7 +255,7 @@ function MovieDetail() {
             <button className="submit-review-btn" type="submit">Submit Review</button>
         </form>
       </div>
-        {/* Display Move Review List  */}
+        {/* Display Movie Review List  */}
         <div className="reviews-container">
         <h2>Reviews</h2>
         {reviews.length > 0 ? (
