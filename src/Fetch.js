@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import UserDropdown from "./UserDropdown";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 function Fetch() {
   // Declare state variables for movie list, error, and logout function
   const [movieList, setMovieList] = useState([]);
   // Declare state variable for input text
   const [inputText, setInputText] = useState('');
-  
 
 
   const options = {
@@ -33,8 +34,11 @@ function Fetch() {
   const handleChange = (event) => {
     const newText = event.target.value;
     setInputText(newText);
-    getResults(newText);
   }; // scrapes text input and feeds term to search
+
+  const handleImageClick = () => {
+    getResults(inputText);
+  };
 
   return (
     <>
@@ -45,6 +49,17 @@ function Fetch() {
             placeholder="Enter a movie title..."
             value={inputText}
             onChange={handleChange}
+            style={{ marginRight: '5px', verticalAlign: 'middle' }}
+            />
+        <FontAwesomeIcon
+            icon={faSearch}
+            onClick={handleImageClick}
+            style={{ cursor: 'pointer',
+            border: '1px solid #ccc',
+            padding: '7px',
+            borderRadius: '7px',
+            verticalAlign: 'middle'
+          }}
             />
       </div>
         <UserDropdown></UserDropdown>
