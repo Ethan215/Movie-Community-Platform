@@ -70,6 +70,17 @@ export const Genres = (props) => {
   const [topMovies, setTopMovies] = useState([]);
   const [movie, setMovie] = useState(null);
 
+  // const fetchReviews = useCallback(async () => {
+  //   try {
+  //     const q = query(collection(db, 'reviews'), where('username', '==', username));
+  //     const querySnapshot = await getDocs(q);
+  //     const reviewsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  //     setTReviews(reviewsData);
+  //   } catch (error) {
+  //     console.error('Failed to fetch top movies:', error);
+  //   }
+  // }, [username]);
+
   const fetchTopMovies = useCallback(async () => {
     try {
       const q = query(collection(db, 'reviews'), where('username', '==', username));
