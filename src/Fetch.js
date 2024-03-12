@@ -38,7 +38,12 @@ function Fetch() {
 
   const handleImageClick = () => {
     getResults(inputText);
-  };
+  }; // feeds term to search upon magnifying glass click
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter')
+    getResults(inputText);
+  }; // feeds term to search upon enter-key down
 
   return (
     <>
@@ -49,18 +54,20 @@ function Fetch() {
             placeholder="Enter a movie title..."
             value={inputText}
             onChange={handleChange}
-            style={{ marginRight: '5px', verticalAlign: 'middle' }}
-            />
+            onKeyDown={handleKeyDown}
+            style={{ marginRight: '5px', 
+                     verticalAlign: 'middle',
+                     border: '1px solid #333'}}
+          />
         <FontAwesomeIcon
             icon={faSearch}
             onClick={handleImageClick}
             style={{ cursor: 'pointer',
-            border: '1px solid #ccc',
-            padding: '7px',
-            borderRadius: '7px',
-            verticalAlign: 'middle'
-          }}
-            />
+            border: '1px solid #333',
+            padding: '6px',
+            borderRadius: '6px',
+            verticalAlign: 'middle'}}
+          />
       </div>
         <UserDropdown></UserDropdown>
 
