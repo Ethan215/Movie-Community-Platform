@@ -17,16 +17,17 @@ function UserPage(){
     const [reviews, setReviews] = useState([]);
     const [watchlist, setWatchlist] = useState([]);
     const navigate = useNavigate();
-    
+    //scrolls the container watchlist to the left 232 pixels.
     function scrollLeft() {
       const container = document.querySelector('.watchlist');
       container.scrollLeft -= 232;
     }
-    
+    //scrolls the container watchlist to the right 232 pixels.
     function scrollRight() {
       const container = document.querySelector('.watchlist');
       container.scrollLeft += 232;
     }
+    //if the review is public, this switches it to private. If private, switches to public.
     const switchPrivate= async(reviewId)=>{
       const reviewDoc = doc(db, "reviews", reviewId);
       const docSnap = await getDoc(reviewDoc);
@@ -36,6 +37,7 @@ function UserPage(){
       });
       fetchReviews();
     }
+    //fetches reviews from the firestore database
     const fetchReviews = useCallback(async () =>{
         try{
             const q = query(collection(db, "reviews"), where("username", "==", username));
@@ -53,6 +55,7 @@ function UserPage(){
         fetchReviews();
     }, [username, fetchReviews]); 
 
+    //fetches watchlist from the firestore database
     const fetchWatchlist = useCallback(async () => {
         try {
             const q = query(collection(db, "watchlist"), where("username", "==", username));
@@ -86,10 +89,13 @@ function UserPage(){
     return(
         <>
         <div className="user-container">
+          {/*This just displays the username of the profile you're viewing */}
         <h2>{`${username}'s Profile`}</h2>
         </div>
+        {/*This displays the movies in the watchlist, allows scrolling*/}
         <div className="watchlist-container">
         <h2>{(currentUser && currentUser.username ===username)? 'My Watchlist' : `${username}'s Watchlist`}</h2>
+        {/*can scroll left*/}
         <button className="scroll-button left" onClick={scrollLeft}>&lt;</button>
         <div className="watchlist">
         
@@ -111,10 +117,13 @@ function UserPage(){
                 <p>No movies added yet.</p>
         )}
         </div>
+        {/*can scroll right*/}
         <button className="scroll-button right" onClick={scrollRight}>&gt;</button>
               </div>
 
-
+{/*This displays the reviews of the users (if user is viewing their own profile
+  they can see public and private reviews, if they're viewing someone else's profile, they
+  can only see public reviews)*/}
 <div className="reviews-container">
         <h2>{(currentUser && currentUser.username ===username)? 'My Reviews' : `${username}'s Reviews`}</h2>
         {reviews.length > 0 ? (

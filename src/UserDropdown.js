@@ -5,6 +5,7 @@ import { useAuthUser } from "./contexts/AuthUserContext";
 import { Alert } from "react-bootstrap";
 import React, {  useState } from "react";
 
+//appears in the top right, contains link to profile, wrapped, and logout
 function UserDropdown() {
     const { currentUser } = useAuthUser();
     const { logout } = useAuthUser();
@@ -48,12 +49,15 @@ return(
             zIndex: 1001,
           }}
         >
+          {/* Link to user profile */}
           <Link to={`/user/${currentUser.username}`} style={{ marginBottom: '10px', display: 'block' }}>
             My Account
           </Link>
+          {/* Link to user wrapped */}
           <Link to={`/user/${currentUser.username}/privateWrapped`} style={{ marginBottom: '10px', display: 'block' }}>
             Wrapped
           </Link>
+          {/* Logout button */}
           <button
             onClick={handleLogout}
             style={{
