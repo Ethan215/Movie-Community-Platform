@@ -36,6 +36,10 @@
   max-width: 80%; /* Controls the maximum width of the overview */
 }
 
+.watchlist-button {
+  margin-top: 10px;
+}
+
 @media (max-width: 768px) {
   .movie-container {
     margin: 20px;
