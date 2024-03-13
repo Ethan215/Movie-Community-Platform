@@ -13,13 +13,6 @@ import UserDropdown from "../UserDropdown";
 
 import {TMDBAPIKeyAuth} from "../Api";
 
-// import { useParams } from 'react-router-dom';
-// import { db } from '../contexts/firebase'
-// import { collection, addDoc, where, query, serverTimestamp, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
-// import { useAuthUser } from "../contexts/AuthUserContext";
-// import { db } from "../contexts/firebase";
-// import { collection, query, where, getDocs } from "firebase/firestore";
-
 export const scroll = new SmoothScroll('a[href*="#"]', {
   speed: 1000,
   speedAsDuration: true,

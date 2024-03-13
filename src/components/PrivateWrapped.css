@@ -35,9 +35,6 @@
     }
     #about,
     #services,
-    #testimonials,
-    #team,
-    #contact,
     #footer {
       width: 111%;
     }
@@ -46,25 +43,6 @@
       width: 110%;
     }
   }
-
-  /* movies Section */
-/* #movies {
-  padding: 100px 0;
-}
-#movies h4 {
-  margin: 5px 0;
-}
-#movies .team-img {
-  width: 240px;
-}
-#movies .thumbnail {
-  background: transparent;
-  border: 0;
-}
-#movies .thumbnail .caption {
-  padding: 10px 0 0;
-  color: #888;
-} */
 
 .circle-container {
   width: 100%;
@@ -114,28 +92,18 @@
 }
 
 
-.top-movies-subheader {
-  margin: 300px 0;
-}
-
-.top-movies-subheader span {
-  display: inline-block;
+#lights-camera-action {
+  margin: 80px 0;
   font-size: 32px;
-  margin: 24px 40px;
 }
 
-span#lights {
-  transform: translateY(-100px);
-}
-
-span#action {
-  transform: translateY(100px);
+#lights-camera-action .row {
+  margin-bottom: 80px;
 }
 
 .movie-wrapper {
   width: 100%;
   height: 100vh;
-  /* background-color: lightblue; */
   margin-bottom: 16px;
   padding: 16px;
 }
@@ -172,6 +140,23 @@ span#action {
   z-index: 1;
 }
 
+#summary {
+  padding-bottom: 5px;
+}
+
+#summary-row {
+  border: 1px solid black;
+  border-radius: 1rem;
+  padding: 3rem 0;
+}
 .summary-image {
-  width: 350px;
+  width: 90%;
+  border-radius: 1rem;
+  border: 3px solid black;
+}
+
+.summary-card {
+  border: 1px solid black;
+  border-radius: 1rem;
+  padding: 2rem;
 }

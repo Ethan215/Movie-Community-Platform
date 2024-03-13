@@ -4,7 +4,7 @@
       "paragraph": "See what your Top Movies and shows are!"
     },
     "About": {
-      "paragraph": "A True Movie Connoisseur!",
+      "paragraph": "You are a True Movie Connoisseur!",
       "Why": [
         "Top Movie #1",
         "Top Movie #2",
@@ -16,38 +16,6 @@
         "Top Show #3"
       ]
     },
-    "Shows": [
-      {
-        "img": "img/testimonials/01.jpg",
-        "name": "Show #1",
-        "text": "Show Description?"
-      },
-      {
-        "img": "img/testimonials/02.jpg",
-        "name": "Show #2",
-        "text": "Show Description?"
-      },
-      {
-        "img": "img/testimonials/03.jpg",
-        "name": "Show #3",
-        "text": "Show Description?"
-      },
-      {
-        "img": "img/testimonials/04.jpg",
-        "name": "Show #4",
-        "text": "Show Description?"
-      },
-      {
-        "img": "img/testimonials/05.jpg",
-        "name": "Show #5",
-        "text": "Show Description?"
-      },
-      {
-        "img": "img/testimonials/05.jpg",
-        "name": "Show #6",
-        "text": "Show Description?"
-      }
-    ],
     "Movies": [
       {
         "img": "img/team/01.jpg",
