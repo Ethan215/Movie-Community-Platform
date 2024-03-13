@@ -213,6 +213,17 @@ function MovieDetail() {
     }
   };
 
+  const avgRating = (reviews) => {
+    let sum = 0;
+    if (reviews.length > 0) {
+      reviews.map((allReviews) => (
+        sum += allReviews.rating
+      ))
+    }
+    const averageRating = sum / reviews.length;
+    return Number.isInteger(averageRating) ? averageRating.toFixed(0) : averageRating.toFixed(1);
+  };
+
   if (!movie) {
     return <div>Movie Doesn't Exist</div>;
   }  
@@ -229,6 +240,22 @@ function MovieDetail() {
               alt={movie.title}
             />
             <p className="movie-synopsis">{`Synopsis: ${movie.overview}`}</p>
+            <h5>{reviews.length > 0 ? (
+                        <>
+                            <span>Average Rating: </span>
+                            {[...Array(1)].map((_, index) => (
+                                <FontAwesomeIcon
+                                    key={index}
+                                    icon={index < avgRating(reviews) ? fasStar : farStar}
+                                    className="star"
+                                />
+                            ))}
+                            <span>{ avgRating(reviews) + ` (${reviews.length} ${reviews.length === 1 ? 'rating' : 'ratings'})`}</span>
+                        </>
+                    ) : (
+                        "Be the first to rate this movie"
+                    )}
+                    </h5>
             {errorWatchlist && <Alert variant="danger">{errorWatchlist}</Alert>}
             {currentUser && (
             <button onClick={addOrRemoveMovieFromWatchlist} className="watchlist-button">
