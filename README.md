@@ -1,3 +1,4 @@
+# Film Community Platform 
 
 ## Contributors
 - Ali Moazzami
@@ -7,24 +8,24 @@
 - Kevin Nguyen
 
 ## Introduction
-Our platform is an innovative web application designed for film enthusiasts. It offers real-time updates, personalized user interaction, and a suite of engaging features such as customizable summaries, watchlist management, and a community-driven rating and review system. The application utilizes Firebase, a comprehensive app development platform that provides services like real-time databases, authentication, and hosting, to create a seamless user experience.
+Our platform is an innovative web application designed for film enthusiasts, offering real-time updates, personalized user interaction, and a suite of engaging features. We leverage Firebase, a comprehensive app development platform by Google, for services like real-time databases, authentication, and hosting.
 
 ## Features
-1. **Searchable Database**: Provide a searchable database of film titles.
-2. **Ratings and Comments**: Engage with the community by rating and discussing your favorite titles.
-3. **Watchlist**: Personalize your viewing experience with a private watchlist.
-4. **Wrapped Sections**: Explore popular titles in public and private summaries
+1. **Searchable Database**: Utilizing Firebase to provide a real-time, searchable database of film titles.
+2. **Ratings and Comments**: A community-driven section for users to rate and discuss their favorite films.
+3. **Watchlist**: A personalized space for users to curate and manage their film viewing plans.
+4. **Wrapped Sections**: Public and private summaries showcasing popular titles and user viewing histories.
 
 ## Installation
-Before running the code for our web application, ensure you have Node.js and npm installed. Firebase tools and FontAwesome icons are also required as part of the setup.
 
 ### Prerequisites
-- Node.js and npm: If not already installed, download and install from [Node.js Official Website](https://nodejs.org/).
-- 
+- Node.js and npm (Download and install from [Node.js Official Website](https://nodejs.org/)).
+
 ### Getting Started with Create React App
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ### Setup
+```bash
 # Clone the project repository to your local machine
 git clone [repository-link]
 
@@ -44,6 +45,7 @@ npm install @fortawesome/free-solid-svg-icons
 
 # Install the Smooth-Scroll package
 npm i smooth-scroll
+
 
 ## Available Scripts
 
