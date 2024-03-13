@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import UserDropdown from "./UserDropdown";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import {TMDBAccessToken} from "./Api"
 
 function Fetch() {
   // Declare state variables for movie list, error, and logout function
@@ -15,7 +16,7 @@ function Fetch() {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YTkwODE5MTAxZDA5MWQ5MTBjYzE0ZjdkZDdmYWE1NSIsInN1YiI6IjY1YmYzZjgyYmE0ODAyMDE4MjZjMWE5YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.KOl14U2aSpIol1hFgSSBS0GBwxlPJ7PcBKOzKYqc8gM'
+      Authorization: 'Bearer ' + TMDBAccessToken
     }
   };  // simplifies fetch calls: insert 'options' as secondary parameter in any fetch, no API key needed!
 

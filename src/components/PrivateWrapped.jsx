@@ -34,7 +34,7 @@ const PrivateWrapped = () => {
 
   const genreCount = {}
   reviews?.forEach(review => {
-    const movie = movies?.find((movie) => review.movie_id == movie.id);
+    const movie = movies?.find((movie) => review.movie_id === movie.id);
     const genres= movie?.genres.map((genre) => genre.name);
 
     genres?.forEach((genre) => {
@@ -55,7 +55,7 @@ const PrivateWrapped = () => {
   const topThreeGenres = genresCountArr.slice(0, 3)
 
   const topFiveReviews = reviews.sort((a, b) => b.rating - a.rating).slice(0, 5);
-  const topFiveMovies = topFiveReviews.map((r, i) => movies.find((m) => m.id == r.movie_id));
+  const topFiveMovies = topFiveReviews.map((r, i) => movies.find((m) => m.id === r.movie_id));
 
   const fetchReviews = async () => {
     try {

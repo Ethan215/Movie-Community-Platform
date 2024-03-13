@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthUser } from "../contexts/AuthUserContext";
 import { Button, Alert } from "react-bootstrap";
+import {TMDBAccessToken} from "../Api";
+
 function Upcoming() {
   // Declare state variables for movie list, error, and logout function
   const [movieList, setMovieList] = useState([]);
@@ -17,7 +19,7 @@ function Upcoming() {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YTkwODE5MTAxZDA5MWQ5MTBjYzE0ZjdkZDdmYWE1NSIsInN1YiI6IjY1YmYzZjgyYmE0ODAyMDE4MjZjMWE5YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.KOl14U2aSpIol1hFgSSBS0GBwxlPJ7PcBKOzKYqc8gM'
+      Authorization: 'Bearer ' + TMDBAccessToken
     }
   };  // simplifies fetch calls: insert 'options' as secondary parameter in any fetch, no API key needed!
 
