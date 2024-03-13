@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import { db } from '../contexts/firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
@@ -9,6 +9,7 @@ import { Movies } from "./PrivateWrappedMovies";
 import JsonData from "./SampleData.json";
 import SmoothScroll from "smooth-scroll";
 import "./PrivateWrapped.css";
+import UserDropdown from "../UserDropdown";
 
 // import { useParams } from 'react-router-dom';
 // import { db } from '../contexts/firebase'
@@ -121,7 +122,8 @@ const PrivateWrapped = () => {
   }, []);
 
   return (
-    isLoading ? <div>Loading...</div> :
+    isLoading ? <><div>Loading...</div><UserDropdown /></> :
+    <>
       <div>
         <Header data={landingPageData.Header} />
         <Genres topThreeGenres={topThreeGenres} />
@@ -133,7 +135,8 @@ const PrivateWrapped = () => {
           topThreeMovies={topFiveMovies.slice(0, 3)}
         />
       </div>
-
+    <UserDropdown />
+    </>
   );
 };
 
