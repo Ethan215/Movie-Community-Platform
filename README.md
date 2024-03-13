@@ -14,7 +14,7 @@ Our platform is a web application designed to provide users with a way to view, 
 1. **Searchable Database**: Provide a searchable database of film titles.
 2. **Ratings and Comments**: Engage with the community by rating and discussing your favorite titles.
 3. **Watchlist**: Personalize your viewing experience with a private watchlist.
-4. **Wrapped Section**: Explore popular titles in public and private summaries
+4. **Wrapped Section**: Explore top titles from your public and private reviews
 
 ## Installation
 Before running the code for our web application, ensure you have Node.js and npm installed. Firebase tools and FontAwesome icons are also required as part of the setup.
@@ -31,7 +31,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 #### Install all dependencies from package.json file
 ``` npm install ```
 #### Supply API keys and IDs
-In CS-35L-Final-Project/src/Api.js, be sure to paste the TMDB Bearer ID, TMDB Api Key, and Firebase API Key in their respective positions. Documentation within Api.js directs user to which lines must be changed to complete this step.
+In Api.js(/src/Api.js), be sure to paste the TMDB Bearer ID, TMDB API Key, and Firebase API Key in their respective positions. Documentation within Api.js directs user to which lines must be changed to complete this step.
 #### Run React
 `npm start`
 Runs the app in the development mode.\
