@@ -49,6 +49,9 @@ npm install @fortawesome/free-solid-svg-icons
 #### Install the Smooth-Scroll package
 ``` npm i smooth-scroll ```
 
+#### For animations in privateWrapped
+``` npm install framer-motion ```
+
 ## Run React
 
 ### `npm start`
