@@ -30,24 +30,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ``` cd [project-directory] ```
 #### Install all dependencies from package.json file
 ``` npm install ```
-
-#### Install the Firebase CLI globally
-``` npm install -g firebase-tools ```
-
-#### Install FontAwesome libraries for use with React components
-```
-npm install @fortawesome/react-fontawesome
-npm install @fortawesome/free-regular-svg-icons
-npm install @fortawesome/free-solid-svg-icons
-```
-
-#### Install the Smooth-Scroll package
-``` npm i smooth-scroll ```
-
-## Run React
-
-### `npm start`
-
+#### Supply API keys and IDs
+In CS-35L-Final-Project/src/Api.js, be sure to paste the TMDB Bearer ID, TMDB Api Key, and Firebase API Key in their respective positions. Documentation within Api.js directs user to which lines must be changed to complete this step.
+#### Run React
+`npm start`
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 ## Dependencies used
