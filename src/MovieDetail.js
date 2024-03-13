@@ -10,6 +10,7 @@ import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
 import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
 import EditReviewModal from './EditReviewModal';
 import UserDropdown from "./UserDropdown";
+import {TMDBAPIKeyAuth} from "./Api";
 
 function MovieDetail() {
   // State variables for rating and review text
@@ -64,7 +65,7 @@ function MovieDetail() {
     const fetchMovie = async () => {
       try {
         // Fetch the movie details from the API
-        const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=7fe3338624f016b56f11393910f1f293`);
+        const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=` + TMDBAPIKeyAuth);
         if (!response.ok) {
           throw new Error('Movie not found');
         }

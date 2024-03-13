@@ -11,6 +11,8 @@ import SmoothScroll from "smooth-scroll";
 import "./PrivateWrapped.css";
 import UserDropdown from "../UserDropdown";
 
+import {TMDBAPIKeyAuth} from "../Api";
+
 // import { useParams } from 'react-router-dom';
 // import { db } from '../contexts/firebase'
 // import { collection, addDoc, where, query, serverTimestamp, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
@@ -34,7 +36,7 @@ const PrivateWrapped = () => {
 
   const genreCount = {}
   reviews?.forEach(review => {
-    const movie = movies?.find((movie) => review.movie_id === movie.id);
+    const movie = movies?.find((movie) => review.movie_id.toString() === movie.id.toString());
     const genres= movie?.genres.map((genre) => genre.name);
 
     genres?.forEach((genre) => {
@@ -55,7 +57,7 @@ const PrivateWrapped = () => {
   const topThreeGenres = genresCountArr.slice(0, 3)
 
   const topFiveReviews = reviews.sort((a, b) => b.rating - a.rating).slice(0, 5);
-  const topFiveMovies = topFiveReviews.map((r, i) => movies.find((m) => m.id === r.movie_id));
+  const topFiveMovies = topFiveReviews.map((r, i) => movies.find((m) => m.id.toString() === r.movie_id.toString()));
 
   const fetchReviews = async () => {
     try {
@@ -75,7 +77,7 @@ const PrivateWrapped = () => {
 
     const fetchConfiguration = async () => {
       try {
-        const response = await fetch(`https://api.themoviedb.org/3/configuration?api_key=7fe3338624f016b56f11393910f1f293`);
+        const response = await fetch(`https://api.themoviedb.org/3/configuration?api_key=` + TMDBAPIKeyAuth);
         if (!response.ok) {
           throw new Error('Error: Not found');
         }
@@ -95,7 +97,7 @@ const PrivateWrapped = () => {
         const reviews = await fetchReviews();
 
         const moviePromises = reviews.map((review) => {
-          const fetchUrl = `https://api.themoviedb.org/3/movie/${review.movie_id}?api_key=7fe3338624f016b56f11393910f1f293`;
+          const fetchUrl = `https://api.themoviedb.org/3/movie/${review.movie_id}?api_key=` + TMDBAPIKeyAuth;
           return fetch(fetchUrl).then((response) => {
             if (!response.ok) throw new Error('Movie not found');
             return response.json();
