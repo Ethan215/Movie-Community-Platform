@@ -46,7 +46,7 @@ npm install @fortawesome/free-solid-svg-icons
 
 # Install the Smooth-Scroll package
 npm i smooth-scroll
-
+‘’‘
 ### `npm start`
 
 Runs the app in the development mode.\
