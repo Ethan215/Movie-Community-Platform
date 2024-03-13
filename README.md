@@ -21,7 +21,7 @@ Before running the code for our web application, ensure you have Node.js and npm
 
 ### Prerequisites
 - Node.js and npm: If not already installed, download and install from [Node.js Official Website](https://nodejs.org/).
-- 
+  
 ### Getting Started with Create React App
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -48,6 +48,8 @@ npm install @fortawesome/free-solid-svg-icons
 
 #### Install the Smooth-Scroll package
 ``` npm i smooth-scroll ```
+
+## Run React
 
 ### `npm start`
 
