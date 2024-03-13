@@ -1,43 +1,34 @@
-## PostgreSQL setup
-For now, you need to install postgres locally.
-For mac, use:
-brew install postgresql
 
-I'm using the credentials joshuayeh with password 'password'
-I don't think you need to create a new user to start it though
-Now that you have postgres installed, run
+## Contributors
+- Ali Moazzami
+- BingHong Ni
+- Devon Wong
+- Joshua Yeh
+- Kevin Nguyen
 
-psql postgres
-CREATE DATABASE moviesdb;
+## Introduction
+Our platform is an innovative web application designed for film enthusiasts. It offers real-time updates, personalized user interaction, and a suite of engaging features such as customizable summaries, watchlist management, and a community-driven rating and review system. The application utilizes Firebase, a comprehensive app development platform that provides services like real-time databases, authentication, and hosting, to create a seamless user experience.
 
-psql -d moviesdb -a -f src/schema.sql
-^^^ assuming you are in the project directory ^^^
+## Features
+1. **Searchable Database**: Provide a searchable database of film titles.
+2. **Ratings and Comments**: Engage with the community by rating and discussing your favorite titles.
+3. **Watchlist**: Personalize your viewing experience with a private watchlist.
+4. **Wrapped Sections**: Explore popular titles in public and private summaries
 
-To make sure this works, run
-psql -d moviesdb
-\dt
+## Installation
+Before running the code for our web application, ensure you have Node.js and npm installed. Firebase tools and FontAwesome icons are also required as part of the setup.
 
-The table "reviews" should show up.
-
-Next, in stil in psql moviesdb:
-do the commands:
-CREATE USER name WITH PASSWORD 'password';
-ALTER USER name WITH SUPERUSER;
-
-Should work.
-If this doesn't work, ask josh for questions.
-
-## Setting up server
-
-You need to start the server to connect to the database. to do so, run
-npm install pg
-npm install cors
-node src/server.js
-^^^ again, assuming you are in the project directory ^^^
-
-# Getting Started with Create React App
-
+### Prerequisites
+- Node.js and npm: If not already installed, download and install from [Node.js Official Website](https://nodejs.org/).
+- 
+### Getting Started with Create React App
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+### Setup
+#### git clone [repository-link]
+  Clone the project repository to your local machine.
+2. cd [project-directory]: Navigate to the cloned project directory.
+
 
 ## Available Scripts
 
