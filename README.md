@@ -25,10 +25,13 @@ Before running the code for our web application, ensure you have Node.js and npm
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ### Setup
-#### git clone [repository-link]
+‘git clone [repository-link]’
   Clone the project repository to your local machine.
-2. cd [project-directory]: Navigate to the cloned project directory.
-
+‘cd [project-directory]’
+   Navigate to the cloned project directory.
+‘npm install firebase’
+‘npm install -g firebase-tools’
+Install Firebase SDKs and CLI tools.
 
 ## Available Scripts
 
