@@ -1,59 +1,26 @@
-/*import React, { useState, useEffect, useCallback } from "react";
-import { useParams } from 'react-router-dom';
-import { db } from '../contexts/firebase'
-import { collection, addDoc, where, query, serverTimestamp, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
 
-export const Genres = (props) => {
-  const {username} = useParams();
-  const [reviews, setReviews] = useState([]);
-    // Gets user reviews
-  const fetchReviews = useCallback(async () =>{
-    try{
-        const q = query(collection(db, "reviews"), where("username", "==", username));
-        const querySnapshot = await getDocs(q);
-        const reviewsData = querySnapshot.docs.map(doc => ({id: doc.id, ...doc.data(),}));
-        console.log(querySnapshot.docs.map(doc => doc.data()));
-        setReviews(reviewsData);
-    }catch(error){
-        console.error("Failed to fetch reviews:", error);
-    }
-  }, [username]);
+import React from 'react';
 
-  // Gets top 3 reviews
-  const findTopThreeReviews = useCallback(async (userId) => {
-    try {
-      const userReviews = await fetchReviews(userId);
-      if (userReviews.length === 0) {
-        console.error("User has no reviews.");
-        return [];
-      }
-      // Sorting reviews in descending order based on rating
-      const sortedReviews = userReviews.sort((a, b) => b.rating - a.rating);
-      // Getting top three highest reviews
-      const topThreeReviews = sortedReviews.slice(0, 3);
-      return topThreeReviews;
-    } catch (error) {
-      console.error("Failed to find top three reviews:", error);
-      return [];
-    }
-  }, [fetchReviews]);
+export const Genres = ({ topThreeGenres }) => {
+
   return (
     <div id="genres" className="text-center">
       <div className="container">
         <div className="section-title">
-          <h2>Top Genres</h2>
+          <h2 className="mb-5 sono-style">Top Genres</h2>
         </div>
-        <div className="row">
-          {props.data
-            ? props.data.map((d, i) => (
-                <div key={`${d.title}-${i}`} className="col-md-4">
-                  {" "}
-                  <img src={d.img} alt={d.title} className="feature-img" />
-                  <h3>{d.title}</h3>
-                  <p>{d.text}</p>
-                </div>
-              ))
-            : "Loading..."}
+
+        <div className="genre-grid">
+          {topThreeGenres.length > 0 ? (
+            topThreeGenres?.map((genre, i) => (
+              <div key={`${genre[0]}-${i}`} className="genre-card">
+                <h3>{genre[0]}</h3>
+                <p className="mb-0 sono-style">{genre[1]} movies</p>
+              </div>
+            ))
+          ) : (
+            <p>Loading...</p>
+          )}
         </div>
       </div>
     </div>
