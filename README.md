@@ -26,27 +26,28 @@ Before running the code for our web application, ensure you have Node.js and npm
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ### Setup
-```bash
+
 # Clone the project repository to your local machine
-git clone [repository-link]
+``` git clone [repository-link] ```
 
 # Navigate to the cloned project directory
-cd [project-directory]
+``` cd [project-directory] ```
 
 # Install Firebase SDKs for your application
-npm install firebase
+``` npm install firebase ```
 
 # Install the Firebase CLI globally
-npm install -g firebase-tools
+``` npm install -g firebase-tools ```
 
 # Install FontAwesome libraries for use with React components
+```
 npm install @fortawesome/react-fontawesome
 npm install @fortawesome/free-regular-svg-icons
-npm install @fortawesome/free-solid-svg-icons
+npm install @fortawesome/free-solid-svg-icons ```
 
 # Install the Smooth-Scroll package
-npm i smooth-scroll
-‘’‘
+``` npm i smooth-scroll ```
+
 ### `npm start`
 
 Runs the app in the development mode.\
