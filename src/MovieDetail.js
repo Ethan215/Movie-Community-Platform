@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Alert } from "react-bootstrap"
 import { db } from './contexts/firebase';
-import { collection, addDoc, where, query, serverTimestamp, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
+import { collection, addDoc, getDoc, where, query, serverTimestamp, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { Link, useParams} from 'react-router-dom';
 import './MovieDetail.css'
 import { useAuthUser } from './contexts/AuthUserContext';
@@ -30,7 +30,16 @@ function MovieDetail() {
   const [errorMessage, setErrorMessage] = useState('');
   const [errorWatchlist, setErrorWatchlist] = useState('');
   const [isInWatchlist, setIsInWatchlist] = useState(false);
-  
+
+  const switchPrivate= async(reviewId)=>{
+    const reviewDoc = doc(db, "reviews", reviewId);
+    const docSnap = await getDoc(reviewDoc);
+    const currentPublicStatus = docSnap.data().public;
+    await updateDoc(reviewDoc, {
+      public: !currentPublicStatus
+    });
+    fetchReviews();
+  }
   
   //  gets all comments matching the current movie ID via a Firebase query.
   const fetchReviews = useCallback(async () => {
@@ -267,9 +276,15 @@ function MovieDetail() {
         <div className="reviews-container">
         <h2>Reviews</h2>
         {reviews.length > 0 ? (
-          reviews.map((review) => (
+          reviews.filter(review => (currentUser?.username === review.username) || (review.public)).map((review)=> (
             <div className="review-block" key={review.id}>
+              {currentUser.username === review.username && (
+              <button className="priv-Button" onClick={() => switchPrivate(review.id)}>
+                {(review.public)? 'Public': 'Private'}
+                </button>
+            )}
               <div className="review-content">
+              
                 {/*This is the section for displaying Review */}
                 <Link to={`/user/${review.username}`} className="reviewer-name-link">{review.username}</Link>
                     <div className="static-stars">
