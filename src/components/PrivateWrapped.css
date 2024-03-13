@@ -1,3 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Aboreto&family=Overpass:ital,wght@0,100..900;1,100..900&family=Sono:wght@200..800&family=Thasadith:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+/* Fonts */
+.sono-style {
+  font-family: 'Sono', monospace;
+  font-optical-sizing: auto;
+  font-weight: 400; /* Adjust as needed between 200 to 800 */
+  font-style: normal;
+  font-variation-settings: "MONO" 1;
+}
+
+.aboreto-style {
+  font-family: "Aboreto", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.thasadith-style {
+  font-family: "Thasadith", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.overpass-style> {
+  font-family: "Overpass", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 350;
+  font-style: normal;
+}
+
 @media screen and (max-width: 400px) {
     #features {
       padding: 20px;
@@ -35,3 +65,113 @@
   padding: 10px 0 0;
   color: #888;
 } */
+
+.circle-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 32px 0;
+}
+
+.circle {
+  width: 600px;
+  height: 600px;
+  border-radius: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: black;
+  color: white;
+}
+
+.genre-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 32px;
+  margin-bottom: 64px;
+}
+
+.genre-card {
+  background-color: black;
+  color: white;
+  border-radius: 16px;
+  padding: 80px 10px;
+}
+
+.top-movies-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.top-movies {
+  background-color: black;
+  color: white;
+  border-radius: 40px;
+  padding: 48px;
+  font-size: 40px;
+}
+
+
+.top-movies-subheader {
+  margin: 300px 0;
+}
+
+.top-movies-subheader span {
+  display: inline-block;
+  font-size: 32px;
+  margin: 24px 40px;
+}
+
+span#lights {
+  transform: translateY(-100px);
+}
+
+span#action {
+  transform: translateY(100px);
+}
+
+.movie-wrapper {
+  width: 100%;
+  height: 100vh;
+  /* background-color: lightblue; */
+  margin-bottom: 16px;
+  padding: 16px;
+}
+
+.movie-title {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.movie-genres {
+  margin-bottom: 24px;
+}
+
+.poster-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px 0;
+}
+
+.poster-circle {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50vh;
+  background-color: orange;
+  background: #010101;
+  background: radial-gradient(circle at center, rgb(0, 0, 0) 40%, rgba(19, 28, 27, 0.503) 100%);
+  z-index: 0;
+}
+
+.poster {
+  width: 360px;
+  z-index: 1;
+}
+
+.summary-image {
+  width: 350px;
+}
