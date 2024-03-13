@@ -26,6 +26,7 @@ Before running the code for our web application, ensure you have Node.js and npm
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ### Setup
+```bash
 # Clone the project repository to your local machine
 git clone [repository-link]
 
@@ -45,10 +46,6 @@ npm install @fortawesome/free-solid-svg-icons
 
 # Install the Smooth-Scroll package
 npm i smooth-scroll
-
-## Available Scripts
-
-In the project directory, you can run:
 
 ### `npm start`
 
