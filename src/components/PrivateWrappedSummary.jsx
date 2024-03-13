@@ -6,16 +6,16 @@ export const About = ({data, baseUrl, topGenre, topThreeMovies}) => {
   return (
     <div id="about">
       <div className="container">
-        <div className="row">
+        <div className="row mb-5">
           <div className="col-xs-12 col-md-6">
-            <img src={`${baseUrl}${topMovie?.poster_path}`} className="img-responsive" alt="" />
+            <img src={`${baseUrl}${topMovie?.poster_path}`} className="summary-image" alt="N/A"/>
           </div>
           <div className="col-xs-12 col-md-6">
             <div className="about-text">
 
-              <h2>User Summary</h2>
+              <h2 className="sono-style">Wrapped Summary</h2>
               <p>{data ? data.paragraph : "loading..."}</p>
-              <h3>User Info</h3>
+              <h3 className="sono-style">Top 3 Movies:</h3>
               <div className="list-style">
                 <div className="col-lg-6 col-sm-6 col-xs-12">
                   <ul>
@@ -27,7 +27,7 @@ export const About = ({data, baseUrl, topGenre, topThreeMovies}) => {
                   </ul>
                 </div>
               </div>
-              <h3>Top Genre: {topGenre}</h3>
+              <h3 className="sono-style">Top Genre: {topGenre}</h3>
             </div>
           </div>
         </div>
