@@ -27,25 +27,26 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ### Setup
 
-# Clone the project repository to your local machine
+#### Clone the project repository to your local machine
 ``` git clone [repository-link] ```
 
-# Navigate to the cloned project directory
+#### Navigate to the cloned project directory
 ``` cd [project-directory] ```
 
-# Install Firebase SDKs for your application
+#### Install Firebase SDKs for your application
 ``` npm install firebase ```
 
-# Install the Firebase CLI globally
+#### Install the Firebase CLI globally
 ``` npm install -g firebase-tools ```
 
-# Install FontAwesome libraries for use with React components
+#### Install FontAwesome libraries for use with React components
 ```
 npm install @fortawesome/react-fontawesome
 npm install @fortawesome/free-regular-svg-icons
-npm install @fortawesome/free-solid-svg-icons ```
+npm install @fortawesome/free-solid-svg-icons
+```
 
-# Install the Smooth-Scroll package
+#### Install the Smooth-Scroll package
 ``` npm i smooth-scroll ```
 
 ### `npm start`
