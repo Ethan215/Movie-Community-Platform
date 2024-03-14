@@ -14,7 +14,7 @@ export const Header = (props) => {
           <h1 className="text-center sono-style">
             Your Private Wrapped
           </h1>
-          <p className="text-center sono-style">See what your Top Movies and shows are!</p>
+          <p className="text-center sono-style">See what your Top Movies are!</p>
         </motion.div>
       </div>
     </header>
