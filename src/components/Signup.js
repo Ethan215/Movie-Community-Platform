@@ -47,7 +47,7 @@ export default function Signup() {
         const user = await signup(emailRef.current.value, passwordRef.current.value);
         try{
         console.log("Successful registration:", user);
-        navigate("/login"); // Jump after successful registration
+        navigate("/"); // Jump after successful registration
         }catch (error) {
           console.error("Registration Failure:", error);
           setError("Failed to create an account. Error: " + error.message); // Display error messages

@@ -27,7 +27,7 @@ import PrivateWrapped from "./components/PrivateWrapped";
 
 function App() {
   const location = useLocation();
-  const shouldHideNavbar = location.pathname === '/' || location.pathname === '/login';
+  const shouldHideNavbar = location.pathname === '/' || location.pathname === '/login' || location.pathname === '/signup'|| location.pathname === '/forgot-password';
   return (
     <>
       <AuthUserProvider>
